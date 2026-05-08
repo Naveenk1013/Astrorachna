@@ -1,0 +1,173 @@
+{
+  "suits": {
+    "wands": {
+      "element": "Fire",
+      "modality": "Cardinal/Fixed/Mutable",
+      "theme": "Action, passion, creativity, ambition"
+    },
+    "cups": {
+      "element": "Water",
+      "modality": "Cardinal/Fixed/Mutable",
+      "theme": "Emotions, relationships, intuition, feelings"
+    },
+    "swords": {
+      "element": "Air",
+      "modality": "Cardinal/Fixed/Mutable",
+      "theme": "Thoughts, communication, conflict, truth"
+    },
+    "pentacles": {
+      "element": "Earth",
+      "modality": "Cardinal/Fixed/Mutable",
+      "theme": "Material, finances, career, physical world"
+    }
+  },
+  "cards": [
+    {
+      "id": 22,
+      "name": "Ace of Wands",
+      "slug": "ace-of-wands",
+      "arcana": "Minor",
+      "suit": "Wands",
+      "number": "Ace",
+      "astrology": {
+        "element": "Fire",
+        "zodiac_sign": null,
+        "ruling_planet": null
+      },
+      "meanings": {
+        "upright": {
+          "general": "Inspiration, new opportunities, growth, potential, beginning",
+          "love": "Passionate new romance, sexual attraction, excitement",
+          "career": "Creative inspiration, new business ventures, innovation",
+          "finances": "Financial opportunity, investment potential",
+          "keywords": ["Inspiration", "Creation", "Opportunity", "Beginning"]
+        },
+        "reversed": {
+          "general": "Lack of energy, delays, false starts, setbacks",
+          "love": "Lack of passion, fizzling romance",
+          "career": "Missed opportunities, creative blocks",
+          "finances": "Poor timing for investments",
+          "keywords": ["Delay", "Block", "Setback"]
+        }
+      }
+    },
+    {
+      "id": 23,
+      "name": "Two of Wands",
+      "slug": "two-of-wands",
+      "arcana": "Minor",
+      "suit": "Wands",
+      "number": "2",
+      "astrology": {
+        "element": "Fire",
+        "zodiac_sign": "Aries",
+        "decan": 1,
+        "degree_range": "0°-10° Aries",
+        "ruling_planet": "Mars"
+      },
+      "meanings": {
+        "upright": {
+          "general": "Future planning, progress, decisions, discovery",
+          "love": "Planning future together, long-term commitment",
+          "career": "Planning career moves, expanding horizons",
+          "finances": "Financial planning, investment strategies",
+          "keywords": ["Planning", "Progress", "Decisions", "Discovery"]
+        },
+        "reversed": {
+          "general": "Fear of unknown, lack of planning, poor decisions",
+          "love": "Fear of commitment, avoiding future planning",
+          "career": "Lack of direction, poor planning",
+          "finances": "Financial uncertainty, poor planning",
+          "keywords": ["Fear", "Uncertainty", "Poor planning"]
+        }
+      }
+    },
+    {
+      "id": 36,
+      "name": "Ace of Cups",
+      "slug": "ace-of-cups",
+      "arcana": "Minor",
+      "suit": "Cups",
+      "number": "Ace",
+      "astrology": {
+        "element": "Water",
+        "zodiac_sign": null,
+        "ruling_planet": null
+      },
+      "meanings": {
+        "upright": {
+          "general": "Love, new relationships, compassion, creativity, emotional awakening",
+          "love": "New love, deep connections, emotional fulfillment",
+          "career": "Creative projects, emotional satisfaction in work",
+          "finances": "Emotional satisfaction, generosity",
+          "keywords": ["Love", "Compassion", "New feelings", "Creativity"]
+        },
+        "reversed": {
+          "general": "Emotional loss, blocked creativity, emptiness, sadness",
+          "love": "Heartbreak, emotional distance, blocked feelings",
+          "career": "Lack of creativity, unfulfilling work",
+          "finances": "Emotional spending, loss",
+          "keywords": ["Emptiness", "Sadness", "Block"]
+        }
+      }
+    },
+    {
+      "id": 50,
+      "name": "Ace of Swords",
+      "slug": "ace-of-swords",
+      "arcana": "Minor",
+      "suit": "Swords",
+      "number": "Ace",
+      "astrology": {
+        "element": "Air",
+        "zodiac_sign": null,
+        "ruling_planet": null
+      },
+      "meanings": {
+        "upright": {
+          "general": "Breakthrough, clarity, sharp mind, success, truth, mental force",
+          "love": "Clear communication, truth in relationships, mental connection",
+          "career": "Mental clarity, breakthrough ideas, new concepts",
+          "finances": "Clear financial thinking, smart decisions",
+          "keywords": ["Clarity", "Truth", "Breakthrough", "Mental power"]
+        },
+        "reversed": {
+          "general": "Confusion, chaos, lack of clarity, miscommunication",
+          "love": "Miscommunication, harsh words, mental games",
+          "career": "Confused thinking, poor communication",
+          "finances": "Financial confusion, poor judgment",
+          "keywords": ["Confusion", "Chaos", "Miscommunication"]
+        }
+      }
+    },
+    {
+      "id": 64,
+      "name": "Ace of Pentacles",
+      "slug": "ace-of-pentacles",
+      "arcana": "Minor",
+      "suit": "Pentacles",
+      "number": "Ace",
+      "astrology": {
+        "element": "Earth",
+        "zodiac_sign": null,
+        "ruling_planet": null
+      },
+      "meanings": {
+        "upright": {
+          "general": "New financial opportunity, prosperity, security, manifestation, abundance",
+          "love": "Stable relationships, practical love, material comfort",
+          "career": "New job, promotion, business opportunity",
+          "finances": "Financial windfall, investment opportunity, prosperity",
+          "keywords": ["Prosperity", "Opportunity", "Abundance", "Manifestation"]
+        },
+        "reversed": {
+          "general": "Lost opportunity, lack of planning and foresight, materialism",
+          "love": "Materialism in relationships, lack of stability",
+          "career": "Missed opportunities, poor planning",
+          "finances": "Financial loss, poor investments, greed",
+          "keywords": ["Loss", "Greed", "Missed opportunity"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+/* ========================================
+   PREMIUM CUSTOM CURSOR
+   ======================================== */
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a, button, input, select, textarea, 
+  .feature-card, .magic-bento-card, .card-slot, 
+  .learn-topic-card, .btn, .nav-link, .tarot-card, .mission-card {
+    cursor: none !important;
+  }
+
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary, #6C63FF);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-color 0.3s ease,
+                border-radius 0.3s ease,
+                mix-blend-mode 0.3s ease;
+  }
+
+  .custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(108, 99, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.4s ease, 
+                background-color 0.4s ease,
+                opacity 0.3s ease;
+  }
+
+  /* ----------------------
+     STATES 
+     ---------------------- */
+
+  /* POINTER (Buttons, Links) - Magnetic Snap / Disappear */
+  .custom-cursor-dot.state-pointer {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+  }
+
+  .custom-cursor-ring.state-pointer {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(108, 99, 255, 0.08);
+    border-color: var(--color-primary);
+    backdrop-filter: blur(2px);
+  }
+
+  /* TEXT - Vertical Beam */
+  .custom-cursor-dot.state-text {
+    width: 4px;
+    height: 28px;
+    border-radius: 2px;
+    background-color: var(--color-text);
+    mix-blend-mode: difference;
+  }
+
+  .custom-cursor-ring.state-text {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* CARD - Massive Blending Lens */
+  .custom-cursor-dot.state-card {
+    width: 120px;
+    height: 120px;
+    background: #FFFFFF;
+    mix-blend-mode: difference;
+    filter: blur(2px);
+  }
+
+  .custom-cursor-ring.state-card {
+    width: 130px;
+    height: 130px;
+    border-color: rgba(255, 255, 255, 0.2);
+    mix-blend-mode: difference;
+  }
+}

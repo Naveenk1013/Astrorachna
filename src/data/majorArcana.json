@@ -1,0 +1,358 @@
+{
+  "deck": {
+    "name": "Rider-Waite-Smith",
+    "version": "1.0",
+    "language": "English"
+  },
+  "cards": [
+    {
+      "id": 0,
+      "name": "The Fool",
+      "slug": "the-fool",
+      "arcana": "Major",
+      "number": 0,
+      "astrology": {
+        "primary_planet": "Uranus",
+        "element": "Air",
+        "zodiac_sign": null,
+        "modality": null,
+        "house_association": 12
+      },
+      "meanings": {
+        "upright": {
+          "general": "New beginnings, innocence, spontaneity, a leap of faith",
+          "love": "New relationships, taking chances in love, free-spirited romance",
+          "career": "Starting new ventures, unconventional career paths, freelance opportunities",
+          "finances": "Financial risk-taking, unexpected windfalls, investments in new ideas",
+          "spiritual": "Trusting the universe, spiritual awakening, divine guidance",
+          "health": "Recovery through unconventional methods, carefree attitude toward health",
+          "keywords": [
+            "Beginnings",
+            "Innocence",
+            "Spontaneity",
+            "Faith",
+            "Adventure"
+          ]
+        },
+        "reversed": {
+          "general": "Recklessness, risk-taking, foolish decisions, hesitation",
+          "love": "Irresponsible in relationships, fear of commitment, immature love",
+          "career": "Poor planning, missed opportunities, unprofessional behavior",
+          "finances": "Financial irresponsibility, gambling losses, poor investments",
+          "keywords": ["Recklessness", "Hesitation", "Poor judgment", "Risk"]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Yes (with caution)",
+        "numerology": 0,
+        "hebrew_letter": "א (Aleph)",
+        "color": ["Yellow", "Sky Blue"],
+        "crystal": ["Amber", "Clear Quartz", "Turquoise"],
+        "chakra": ["Crown", "Third Eye"]
+      },
+      "symbolism": {
+        "primary_symbols": ["Cliff", "White Rose", "Small Dog", "Bundle"],
+        "numerology_meaning": "0 represents infinite potential, the void before creation"
+      },
+      "timing": {
+        "season": "Spring",
+        "time_of_day": "Dawn"
+      }
+    },
+    {
+      "id": 1,
+      "name": "The Magician",
+      "slug": "the-magician",
+      "arcana": "Major",
+      "number": 1,
+      "astrology": {
+        "primary_planet": "Mercury",
+        "element": "Air",
+        "zodiac_sign": null,
+        "modality": null,
+        "house_association": 1
+      },
+      "meanings": {
+        "upright": {
+          "general": "Manifestation, resourcefulness, power, inspired action, skill",
+          "love": "Attracting love through confidence, magnetic charm, making things happen",
+          "career": "Using your skills effectively, advancement, entrepreneurship, leadership",
+          "finances": "Financial skill, smart investments, resourceful money management",
+          "spiritual": "Spiritual power, channeling energy, aligning will with divine purpose",
+          "health": "Taking control of health, holistic healing, mind-body connection",
+          "keywords": [
+            "Manifestation",
+            "Power",
+            "Skill",
+            "Action",
+            "Resourcefulness"
+          ]
+        },
+        "reversed": {
+          "general": "Manipulation, poor planning, untapped talents, trickery",
+          "love": "Using manipulation in relationships, lack of chemistry, dishonesty",
+          "career": "Misusing talents, lack of focus, unfulfilled potential",
+          "finances": "Financial manipulation, get-rich-quick schemes, poor budgeting",
+          "keywords": [
+            "Manipulation",
+            "Illusion",
+            "Unused potential",
+            "Trickery"
+          ]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Yes",
+        "numerology": 1,
+        "hebrew_letter": "ב (Beth)",
+        "color": ["Yellow", "Violet"],
+        "crystal": ["Citrine", "Tiger's Eye", "Agate"],
+        "chakra": ["Throat", "Solar Plexus"]
+      },
+      "symbolism": {
+        "primary_symbols": [
+          "Infinity Symbol",
+          "Wand",
+          "Four Elements",
+          "Garden"
+        ],
+        "numerology_meaning": "1 represents new beginnings, creation, individuality"
+      },
+      "timing": {
+        "season": "Spring",
+        "time_of_day": "Morning"
+      }
+    },
+    {
+      "id": 2,
+      "name": "The High Priestess",
+      "slug": "the-high-priestess",
+      "arcana": "Major",
+      "number": 2,
+      "astrology": {
+        "primary_planet": "Moon",
+        "element": "Water",
+        "zodiac_sign": null,
+        "modality": null,
+        "house_association": 2
+      },
+      "meanings": {
+        "upright": {
+          "general": "Intuition, sacred knowledge, divine feminine, the subconscious mind",
+          "love": "Mysterious attraction, intuitive connection, spiritual partnership",
+          "career": "Trust your intuition, hidden information, research and study",
+          "finances": "Listen to inner wisdom about money, hidden opportunities",
+          "spiritual": "Deep spiritual insight, psychic abilities, inner wisdom",
+          "health": "Mind-body connection, listen to body's signals, alternative healing",
+          "keywords": [
+            "Intuition",
+            "Mystery",
+            "Wisdom",
+            "Divine Feminine",
+            "Subconscious"
+          ]
+        },
+        "reversed": {
+          "general": "Secrets, disconnected from intuition, withdrawal, silence",
+          "love": "Hidden secrets in relationships, repressed feelings, lack of communication",
+          "career": "Ignoring intuition, information withheld, confusion",
+          "finances": "Financial secrets, ignoring gut feelings about money",
+          "keywords": ["Hidden agendas", "Disconnect", "Secrets", "Confusion"]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Maybe (trust intuition)",
+        "numerology": 2,
+        "hebrew_letter": "ג (Gimel)",
+        "color": ["Silver", "Blue", "White"],
+        "crystal": ["Moonstone", "Pearl", "Selenite"],
+        "chakra": ["Third Eye", "Crown"]
+      },
+      "symbolism": {
+        "primary_symbols": [
+          "Pillars",
+          "Pomegranates",
+          "Crescent Moon",
+          "Torah"
+        ],
+        "numerology_meaning": "2 represents duality, balance, partnership"
+      },
+      "timing": {
+        "season": "All seasons",
+        "time_of_day": "Night"
+      }
+    },
+    {
+      "id": 3,
+      "name": "The Empress",
+      "slug": "the-empress",
+      "arcana": "Major",
+      "number": 3,
+      "astrology": {
+        "primary_planet": "Venus",
+        "element": "Earth",
+        "zodiac_sign": "Taurus",
+        "modality": "Fixed",
+        "house_association": 2
+      },
+      "meanings": {
+        "upright": {
+          "general": "Femininity, beauty, nature, nurturing, abundance, creativity",
+          "love": "Romantic love, sensuality, fertility, caring relationships",
+          "career": "Creative projects, growth, nurturing business, artistic success",
+          "finances": "Financial abundance, prosperity, comfort, luxury",
+          "spiritual": "Connection to nature, goddess energy, creative manifestation",
+          "health": "Fertility, pregnancy, vibrant health, self-care",
+          "keywords": [
+            "Abundance",
+            "Fertility",
+            "Nature",
+            "Nurturing",
+            "Beauty"
+          ]
+        },
+        "reversed": {
+          "general": "Creative block, dependence on others, smothering, neglect",
+          "love": "Codependency, possessiveness, lack of self-love",
+          "career": "Creative blocks, lack of growth, stifled expression",
+          "finances": "Financial dependence, overspending on luxury",
+          "keywords": ["Dependence", "Block", "Neglect", "Overindulgence"]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Yes",
+        "numerology": 3,
+        "hebrew_letter": "ד (Daleth)",
+        "color": ["Green", "Pink"],
+        "crystal": ["Emerald", "Rose Quartz", "Jade"],
+        "chakra": ["Heart"]
+      },
+      "symbolism": {
+        "primary_symbols": ["Wheat", "Venus Symbol", "Crown", "Cushions"],
+        "numerology_meaning": "3 represents creativity, growth, expression"
+      },
+      "timing": {
+        "season": "Spring",
+        "time_of_day": "Afternoon"
+      }
+    },
+    {
+      "id": 4,
+      "name": "The Emperor",
+      "slug": "the-emperor",
+      "arcana": "Major",
+      "number": 4,
+      "astrology": {
+        "primary_planet": "Mars",
+        "element": "Fire",
+        "zodiac_sign": "Aries",
+        "modality": "Cardinal",
+        "house_association": 1
+      },
+      "meanings": {
+        "upright": {
+          "general": "Authority, establishment, structure, father figure, leadership",
+          "love": "Traditional relationships, commitment, protector role, stability",
+          "career": "Leadership roles, building structure, business success, authority",
+          "finances": "Financial stability, solid planning, material success",
+          "spiritual": "Spiritual discipline, establishing order, masculine energy",
+          "health": "Taking charge of health, structured wellness routines",
+          "keywords": [
+            "Authority",
+            "Structure",
+            "Leadership",
+            "Father",
+            "Stability"
+          ]
+        },
+        "reversed": {
+          "general": "Domination, excessive control, rigidity, inflexibility",
+          "love": "Controlling relationships, lack of emotion, power struggles",
+          "career": "Abuse of power, overly rigid systems, poor leadership",
+          "finances": "Financial mismanagement, too controlling with money",
+          "keywords": ["Tyranny", "Rigidity", "Control", "Inflexibility"]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Yes",
+        "numerology": 4,
+        "hebrew_letter": "ה (Heh)",
+        "color": ["Red", "Orange"],
+        "crystal": ["Ruby", "Carnelian", "Red Jasper"],
+        "chakra": ["Root", "Solar Plexus"]
+      },
+      "symbolism": {
+        "primary_symbols": ["Throne", "Ram Heads", "Orb", "Scepter"],
+        "numerology_meaning": "4 represents stability, foundation, structure"
+      },
+      "timing": {
+        "season": "Spring (March-April)",
+        "time_of_day": "Noon"
+      }
+    },
+    {
+      "id": 5,
+      "name": "The Hierophant",
+      "slug": "the-hierophant",
+      "arcana": "Major",
+      "number": 5,
+      "astrology": {
+        "primary_planet": "Venus",
+        "element": "Earth",
+        "zodiac_sign": "Taurus",
+        "modality": "Fixed",
+        "house_association": 9
+      },
+      "meanings": {
+        "upright": {
+          "general": "Spiritual wisdom, religious beliefs, conformity, tradition, institutions",
+          "love": "Traditional commitment, marriage, shared values, conventional relationships",
+          "career": "Following established methods, mentorship, corporate culture, education",
+          "finances": "Traditional financial planning, established wealth, conservative investments",
+          "spiritual": "Formal spiritual education, religious guidance, sacred rituals",
+          "health": "Traditional medicine, established health practices",
+          "keywords": [
+            "Tradition",
+            "Conformity",
+            "Wisdom",
+            "Institutions",
+            "Teaching"
+          ]
+        },
+        "reversed": {
+          "general": "Personal beliefs, freedom, challenging tradition, unconventional",
+          "love": "Unconventional relationships, breaking rules, non-traditional commitment",
+          "career": "Challenging authority, breaking from tradition, innovative methods",
+          "finances": "Unconventional financial approaches, breaking from norms",
+          "keywords": [
+            "Rebellion",
+            "Unconventional",
+            "Freedom",
+            "Personal beliefs"
+          ]
+        }
+      },
+      "correspondences": {
+        "yes_no_response": "Yes (follow tradition)",
+        "numerology": 5,
+        "hebrew_letter": "ו (Vav)",
+        "color": ["Red", "Gray"],
+        "crystal": ["Topaz", "Sapphire"],
+        "chakra": ["Throat"]
+      },
+      "symbolism": {
+        "primary_symbols": [
+          "Crossed Keys",
+          "Triple Crown",
+          "Pillars",
+          "Blessing Hand"
+        ],
+        "numerology_meaning": "5 represents change, freedom, adaptability"
+      },
+      "timing": {
+        "season": "Spring (late April-May)",
+        "time_of_day": "Morning"
+      }
+    }
+  ]
+}
