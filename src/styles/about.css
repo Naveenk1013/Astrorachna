@@ -3,18 +3,19 @@
    =================================== */
 
 .about-page {
-  padding-top: 80px;
   position: relative;
   overflow: hidden;
 }
 
+
 /* ---- About Hero ---- */
 
 .about-hero {
-  padding: 4rem 0 3rem;
+  padding: 3rem 0 2rem;
   text-align: center;
   position: relative;
 }
+
 
 .about-hero-badge {
   display: inline-flex;
@@ -115,15 +116,21 @@
 
 .about-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Locked to 3 columns */
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
+@media (max-width: 768px) {
+  .about-services-grid {
+    gap: 0.75rem;
+  }
+}
+
 .service-card {
   padding: 0;
-  background: #fdfdfd;
-  border-radius: 24px; /* Explicit match to component prop */
+  background: rgba(253, 253, 253, 0.5);
+  border-radius: 24px;
   border: 1px solid rgba(108, 99, 255, 0.15);
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
@@ -139,6 +146,12 @@
   overflow: hidden;
   height: 100%;
   border-radius: inherit; /* Inherit rounded corners from .service-card */
+}
+
+@media (max-width: 768px) {
+  .service-card .border-glow-inner {
+    padding: 1rem 0.5rem;
+  }
 }
 
 .service-card-bg {
@@ -193,6 +206,35 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 768px) {
+  .about-services-grid {
+    gap: 1.5vw;
+  }
+  .service-card .border-glow-inner {
+    padding: 3vw 1.5vw;
+  }
+  .service-icon {
+    width: 8vw;
+    height: 8vw;
+    margin-bottom: 1vw;
+    border-radius: 1.5vw;
+  }
+  .service-icon svg {
+    width: 4vw;
+    height: 4vw;
+  }
+  .service-card h3 {
+    font-size: 3.2vw;
+    margin-bottom: 1vw;
+  }
+  .service-card p {
+    font-size: 2.2vw;
+    line-height: 1.4;
+  }
+}
+
+
+
 /* ---- Consultation Section ---- */
 .about-consultation {
   padding: 4rem 0;
@@ -242,9 +284,15 @@
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .testimonial-grid {
+    gap: 0.75rem;
+  }
 }
 
 .testimonial-card {
@@ -263,17 +311,31 @@
 }
 
 .testimonial-card p {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
   font-style: italic;
-  margin-bottom: 1rem;
 }
 
 .testimonial-author {
-  font-weight: 700;
-  color: var(--color-text);
-  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .testimonial-card .border-glow-inner {
+    padding: 1.5rem 1rem;
+  }
+  .testimonial-card p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+  .testimonial-author {
+    font-size: 0.65rem;
+  }
 }
 
 /* ---- Social Presence ---- */

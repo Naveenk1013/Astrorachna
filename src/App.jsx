@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { Sparkle, Sparkles, AlertCircle } from 'lucide-react';
+import { Sparkle, Sparkles, AlertCircle, Mail, MessageCircle, Link as LinkIcon, Video } from 'lucide-react';
 import CustomCursor from './components/ui/CustomCursor';
 import SmoothScroller from './components/layout/SmoothScroller';
 import Grainient from './components/ui/Grainient';
 import Magnetic from './components/ui/Magnetic';
+import LineWaves from './components/ui/LineWaves';
 import Home from './pages/Home';
 import Reading from './pages/Reading';
 import BirthCard from './pages/BirthCard';
@@ -62,6 +63,8 @@ function App() {
               centerY={0}
               zoom={0.9}
             />
+
+
           </div>
         )}
         {/* CSS gradient fallback for mobile */}
@@ -134,6 +137,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/learn" element={<LearnHub />} />
+
+
               <Route path="/reading" element={<Reading />} />
               <Route path="/birth-card" element={<BirthCard />} />
             </Routes>
@@ -142,47 +147,99 @@ function App() {
 
         {/* Footer */}
         <footer className="main-footer">
+          {/* LineWaves Background — desktop only */}
+          {!isTouchDevice && (
+            <div className="footer-waves-bg">
+              <LineWaves
+                speed={0.2}
+                innerLineCount={28}
+                outerLineCount={32}
+                warpIntensity={0.8}
+                rotation={-30}
+                edgeFadeWidth={0.0}
+                colorCycleSpeed={0.6}
+                brightness={0.15}
+                color1="#6C63FF"
+                color2="#8B5CF6"
+                color3="#A78BFA"
+                enableMouseInteraction={true}
+                mouseInfluence={1.5}
+              />
+            </div>
+          )}
+
           <div className="container">
+            {/* Top: Brand + Tagline */}
+            <div className="footer-top">
+              <Link to="/" className="nav-logo footer-logo">
+                <span className="logo-symbol"><Sparkles size={28} /></span>
+                <span className="logo-text">Rachna</span>
+              </Link>
+              <p className="footer-tagline">
+                Where ancient wisdom meets modern clarity.
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="footer-divider" />
+
+            {/* Main Grid */}
             <div className="footer-grid">
+              {/* Brand Column */}
               <div className="footer-brand">
-                <h3><Sparkle size={18} /> Rachna</h3>
-                <p>Creation · Cosmos · Destiny</p>
                 <p className="footer-mission">
-                  Empowering people with astrological wisdom through science and logic.
+                  Guiding lives with authenticity, clarity, and cosmic wisdom through the fusion of ancient tradition and logical insight.
                 </p>
+                <div className="footer-socials">
+                  <Magnetic strength={15}><a href="#" aria-label="Email"><Mail size={18} /></a></Magnetic>
+                  <Magnetic strength={15}><a href="#" aria-label="Chat"><MessageCircle size={18} /></a></Magnetic>
+                  <Magnetic strength={15}><a href="#" aria-label="LinkedIn"><LinkIcon size={18} /></a></Magnetic>
+                  <Magnetic strength={15}><a href="#" aria-label="YouTube"><Video size={18} /></a></Magnetic>
+                </div>
               </div>
 
+              {/* Services Column */}
               <div className="footer-links">
-                <h4>Explore</h4>
+                <h4>Cosmic Services</h4>
                 <Magnetic strength={10}><Link to="/reading">Tarot Reading</Link></Magnetic>
                 <Magnetic strength={10}><Link to="/birth-card">Birth Cards</Link></Magnetic>
-                <Magnetic strength={10}><Link to="/learn">Learn Astrology</Link></Magnetic>
+                <Magnetic strength={10}><Link to="/learn">Numerology</Link></Magnetic>
+                <Magnetic strength={10}><Link to="/learn">Kundali Analysis</Link></Magnetic>
               </div>
 
+              {/* Explorations Column */}
               <div className="footer-links">
-                <h4>Learn</h4>
-                <Magnetic strength={10}><Link to="/learn">Why Astrology Works</Link></Magnetic>
-                <Magnetic strength={10}><Link to="/learn">Zodiac Signs</Link></Magnetic>
-                <Magnetic strength={10}><Link to="/learn">Planets &amp; Houses</Link></Magnetic>
+                <h4>Explorations</h4>
+                <Magnetic strength={10}><Link to="/learn">Why it Works</Link></Magnetic>
+                <Magnetic strength={10}><Link to="/learn">Zodiac Wisdom</Link></Magnetic>
+                <Magnetic strength={10}><Link to="/learn">Planetary Loops</Link></Magnetic>
+                <Magnetic strength={10}><Link to="/learn">Learning Hub</Link></Magnetic>
               </div>
 
+              {/* Support Column */}
               <div className="footer-links">
-                <h4>Connect</h4>
-                <Magnetic strength={10}><a href="#newsletter">Newsletter</a></Magnetic>
-                <Magnetic strength={10}><a href="#about">About Us</a></Magnetic>
-                <Magnetic strength={10}><a href="#contact">Contact</a></Magnetic>
+                <h4>Support & Legal</h4>
+                <Magnetic strength={10}><Link to="/about">About Rachna</Link></Magnetic>
+                <Magnetic strength={10}><a href="#contact">Contact Hub</a></Magnetic>
+                <Magnetic strength={10}><a href="#privacy">Privacy Policy</a></Magnetic>
+                <Magnetic strength={10}><a href="#terms">Terms of Service</a></Magnetic>
               </div>
             </div>
 
+            {/* Bottom Bar */}
             <div className="footer-bottom">
-              <p>© 2026 Rachna. All rights reserved.</p>
+              <p className="footer-copyright">
+                © 2026 Rachna Kumari. Crafted for the Cosmos.
+              </p>
               <p className="footer-disclaimer">
-                <AlertCircle size={13} />
-                For entertainment and self-reflection purposes only
+                <AlertCircle size={14} />
+                Interpretations are for self-reflection & entertainment only.
               </p>
             </div>
           </div>
         </footer>
+
+
       </div>
     </Router>
   );

@@ -33,43 +33,43 @@ const About = () => {
       icon: <Sun size={24} />, 
       title: 'Astrology', 
       desc: 'Detailed birth chart analysis and planetary insights to understand your life patterns and cosmic influences.',
-      colors: { color1: '#818CF8', color2: '#C7D2FE', color3: '#F5F3FF' } // High contrast Indigo
-    },
-    { 
-      icon: <Compass size={24} />, 
-      title: 'Numerology', 
-      desc: 'Decode the hidden meaning behind your numbers — life path, destiny, and personal year cycles.',
-      colors: { color1: '#F59E0B', color2: '#FDE68A', color3: '#FFFBEB' } // High contrast Amber
+      colors: { color1: '#F5F3FF', color2: '#EDE9FF', color3: '#FDF4FF' } // Subtle Lavender
     },
     { 
       icon: <Moon size={24} />, 
-      title: 'Kundali Analysis', 
-      desc: 'Traditional Vedic kundali matching and analysis for marriage, career, and life milestones.',
-      colors: { color1: '#EC4899', color2: '#F9A8D4', color3: '#FDF2F8' } // High contrast Rose
+      title: 'Numerology', 
+      desc: 'Discover the hidden meaning of numbers in your life and how they shape your destiny and personality.',
+      colors: { color1: '#F0FDFA', color2: '#E0F2FE', color3: '#FDF4FF' } // Subtle Cyan/Blue
     },
     { 
-      icon: <Gem size={24} />, 
+      icon: <Users size={24} />, 
+      title: 'Kundali Analysis', 
+      desc: 'Traditional Vedic chart matching and comprehensive analysis for marriage and partnership compatibility.',
+      colors: { color1: '#FFF1F2', color2: '#FFF7ED', color3: '#FDF4FF' } // Subtle Rose/Amber
+    },
+    { 
+      icon: <Sparkle size={24} />, 
       title: 'Tarot Reading', 
-      desc: 'Intuitive tarot card readings for clarity on relationships, decisions, and future possibilities.',
-      colors: { color1: '#8B5CF6', color2: '#C4B5FD', color3: '#F5F3FF' } // High contrast Violet
+      desc: 'Intuitive card spreads to provide clarity on your current situations and guidance for your immediate future.',
+      colors: { color1: '#F8FAFC', color2: '#F1F5F9', color3: '#FDF4FF' } // Subtle Slate/Grey
     },
     { 
       icon: <TrendingUp size={24} />, 
       title: 'Career Guidance', 
-      desc: 'Astrological career counseling to identify ideal professions, timing, and growth opportunities.',
-      colors: { color1: '#0EA5E9', color2: '#BAE6FD', color3: '#F0F9FF' } // High contrast Sky
+      desc: 'Identify the best professional paths and timing for career growth based on your astrological markers.',
+      colors: { color1: '#ECFDF5', color2: '#F0F9FF', color3: '#FDF4FF' } // Subtle Emerald/Blue
     },
     { 
       icon: <Heart size={24} />, 
-      title: 'Marriage Consultation', 
-      desc: 'Compatibility analysis, muhurat selection, and relationship guidance rooted in Vedic wisdom.',
-      colors: { color1: '#F97316', color2: '#FED7AA', color3: '#FFF7ED' } // High contrast Orange
+      title: 'Marriage & Love', 
+      desc: 'Insights into your relationship dynamics, emotional needs, and the best timing for significant life commitments.',
+      colors: { color1: '#FFF5F7', color2: '#FFF0F6', color3: '#FDF4FF' } // Subtle Pink
     },
     { 
-      icon: <Shield size={24} />, 
-      title: 'Health Insights', 
-      desc: 'Planetary health indicators and remedial measures for physical and mental well-being.',
-      colors: { color1: '#10B981', color2: '#A7F3D0', color3: '#F0FDF4' } // High contrast Emerald
+      icon: <Gem size={24} />, 
+      title: 'Remedial Measures', 
+      desc: 'Practical suggestions and logical solutions to balance negative planetary influences and enhance positive ones.',
+      colors: { color1: '#F5F3FF', color2: '#FAF5FF', color3: '#FDF4FF' } // Subtle Purple
     },
   ];
 

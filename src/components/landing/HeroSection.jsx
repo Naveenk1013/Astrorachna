@@ -81,9 +81,10 @@ const HeroSection = () => {
           </h1>
 
           <p className="hero-description">
-            Experience astrology as a bridge between ancient wisdom and modern logic. 
-            Get personalized insights into your destiny with scientific clarity.
+            Experience astrology as a bridge between <span className="cursive-accent">ancient wisdom</span> and <span className="cursive-accent">modern logic</span>. 
+            Get personalized insights into your destiny with <span className="cursive-accent">scientific clarity</span>.
           </p>
+
 
           <div className="hero-cta">
             <Magnetic strength={30}>

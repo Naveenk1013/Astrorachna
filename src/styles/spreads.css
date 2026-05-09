@@ -29,6 +29,8 @@
 .selection-counter {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   border: 1px solid var(--glass-border);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-xl);
@@ -192,6 +194,8 @@
 .interpretation-panel {
   background: var(--color-bg-card, #FFFFFF);
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
   border: 1px solid rgba(108, 99, 255, 0.12);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);

@@ -6,14 +6,22 @@ const CustomCursor = () => {
   const cursorDotRef = useRef(null);
   const cursorRingRef = useRef(null);
   
+  // Initialize state once during first render to avoid cascading updates
+  const [isTouch] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia("(pointer: coarse)").matches;
+  });
+
+  
   const [hoverState, setHoverState] = useState('default'); // 'default', 'pointer', 'text', 'card'
 
   useEffect(() => {
-    // Only enable on non-touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (isTouch) return;
 
     const dot = cursorDotRef.current;
+
     const ring = cursorRingRef.current;
+
 
     // Fast setters for performance
     const setDotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3.out" });
@@ -65,10 +73,14 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isTouch]);
+
+
+  if (isTouch) return null;
 
   return (
     <>
+
       <div 
         ref={cursorDotRef}
         className={`custom-cursor-dot state-${hoverState}`}
