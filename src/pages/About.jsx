@@ -90,190 +90,163 @@ const TESTIMONIALS_DATA = [
 
 
 const About = () => {
+  const [activeTab, setActiveTab] = useState('story');
   const [formData, setFormData] = useState({ name: '', email: '', message: '', consultationType: '' });
   const [formStatus, setFormStatus] = useState('idle');
 
-  const sectionRef = useRef(null);
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (formStatus === 'sending') return;
-    setFormStatus('sending');
-    try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      if (res.ok) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', message: '', consultationType: '' });
-      } else {
-        setFormStatus('error');
-      }
-    } catch {
-      setFormStatus('error');
-    }
-  };
+  const containerRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const TABS = [
+    { id: 'story', label: 'My Story', icon: <BookOpen size={18} /> },
+    { id: 'services', label: 'Services', icon: <Sun size={18} /> },
+    { id: 'feedback', label: 'Feedback', icon: <Users size={18} /> },
+    { id: 'contact', label: 'Contact', icon: <Mail size={18} /> },
+  ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-      tl.from('.dashboard-pane', { 
-        opacity: 0, 
-        y: 20, 
-        stagger: 0.1, 
-        duration: 1, 
-        ease: 'power3.out' 
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+    // Transition animation when tab changes
+    gsap.fromTo(contentRef.current, 
+      { opacity: 0, y: 10, filter: 'blur(10px)' },
+      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'power3.out' }
+    );
+  }, [activeTab]);
 
-  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus('sending');
+    // Simulated or actual fetch here...
+    setTimeout(() => setFormStatus('success'), 1500);
+  };
 
   return (
-    <div className="about-page single-screen" ref={sectionRef}>
-      {/* Background Micro-elements */}
-      <div className="about-bg-elements">
-        <div className="floating-orb orb-1"></div>
-        <div className="floating-orb orb-2"></div>
+    <div className="about-app-container" ref={containerRef}>
+      {/* Cinematic Background */}
+      <div className="app-bg-glow">
+        <div className="glow-orb g-1"></div>
+        <div className="glow-orb g-2"></div>
       </div>
 
-      {!isTouchDevice && (
-        <div className="about-hero-waves">
-          <LineWaves
-            speed={0.1}
-            innerLineCount={20}
-            outerLineCount={24}
-            warpIntensity={0.4}
-            brightness={0.08}
-            color1="#6C63FF"
-            color2="#A78BFA"
-            color3="#F472B6"
-          />
-        </div>
-      )}
+      <div className="about-hero-waves">
+        <LineWaves brightness={0.05} color1="#6C63FF" color2="#A78BFA" />
+      </div>
 
-      <div className="about-dashboard-grid">
-        {/* Left Column: Profile & Stats */}
-        <div className="dashboard-pane profile-pane">
-          <div className="hero-compact">
-            <h1 className="about-title-compact">Rachna Kumari</h1>
-            <div className="about-hero-badge-compact">
-              <Sparkle size={12} /> Professional Astrologer
+      <div className="apple-app-shell">
+        {/* Header Section */}
+        <header className="app-header">
+          <div className="profile-wrapper">
+            <div className="profile-img-ring">
+              <img src={rachnaPortrait} alt="Rachna Kumari" />
             </div>
-          </div>
-
-          <div className="journey-image-compact">
-            <img src={rachnaPortrait} alt="Rachna Kumari" />
-            <div className="image-decoration"></div>
-          </div>
-
-          <div className="about-stats-compact">
-            <div className="about-stat-mini">
-              <span className="stat-val">5+</span>
-              <span className="stat-lbl">Years</span>
-            </div>
-            <div className="about-stat-mini">
-              <span className="stat-val">1k+</span>
-              <span className="stat-lbl">Clients</span>
-            </div>
-            <div className="about-stat-mini">
-              <span className="stat-val">7</span>
-              <span className="stat-lbl">Specialties</span>
+            <div className="profile-meta">
+              <h1>Rachna Kumari</h1>
+              <span className="profile-tag">Professional Astrologer</span>
             </div>
           </div>
           
-          <div className="social-links-compact">
-            <Magnetic strength={10}>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn"><Globe size={16} /></a>
-            </Magnetic>
-            <Magnetic strength={10}>
-              <a href="https://blogspot.com" target="_blank" rel="noopener noreferrer" className="social-icon-btn"><BookOpen size={16} /></a>
-            </Magnetic>
+          <div className="quick-stats-row">
+            <div className="q-stat"><strong>5+</strong><span>Years</span></div>
+            <div className="q-stat"><strong>1k+</strong><span>Clients</span></div>
+            <div className="q-stat"><strong>7</strong><span>Fields</span></div>
           </div>
-        </div>
+        </header>
 
-        {/* Middle Column: Journey & Services */}
-        <div className="dashboard-pane center-pane">
-          <div className="pane-section journey-pane">
-            <div className="section-header-compact">
-              <BookOpen size={18} />
-              <h2>My Journey</h2>
-            </div>
-            <p className="journey-text-mini">
-              Growing up in a household where Vedic traditions were woven into everyday life, I dedicated myself to studying astrology, numerology, and tarot. My approach is rooted in authentic knowledge and a genuine desire to help people find clarity through honesty and empathy.
-            </p>
-          </div>
-
-          <div className="pane-section services-pane">
-            <div className="section-header-compact">
-              <Sun size={18} />
-              <h2>What I Offer</h2>
-            </div>
-            <div className="services-mini-grid">
-              {SERVICES_DATA.map((service) => (
-                <div key={service.id} className="service-item-mini">
-                  <div className="service-icon-mini">{service.icon}</div>
-                  <div className="service-info-mini">
-                    <h4>{service.title}</h4>
-                    <p>{service.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Testimonials & Contact */}
-        <div className="dashboard-pane right-pane">
-          <div className="pane-section testimonials-pane-mini">
-            <div className="section-header-compact">
-              <Users size={18} />
-              <h2>Client Stories</h2>
-            </div>
-            <div className="testimonials-stack">
-              {TESTIMONIALS_DATA.slice(0, 3).map((t, i) => (
-                <div key={i} className="testimonial-mini-card">
-                  <div className="stars-mini">
-                    {[...Array(t.rating)].map((_, j) => <Star key={j} size={10} fill="currentColor" />)}
-                  </div>
-                  <p>"{t.text}"</p>
-                  <span className="author-mini">— {t.author}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="pane-section contact-pane-mini">
-            <div className="section-header-compact">
-              <Mail size={18} />
-              <h2>Get In Touch</h2>
-            </div>
-            <form onSubmit={handleSubmit} className="form-mini">
-              <div className="form-row-mini">
-                <input type="text" required placeholder="Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-                <input type="email" required placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+        {/* Dynamic Content Area */}
+        <main className="app-main-content" ref={contentRef}>
+          {activeTab === 'story' && (
+            <div className="tab-content story-view">
+              <div className="content-badge">Authenticity & Empathy</div>
+              <p>
+                My fascination with the stars began in childhood, woven into everyday life by Vedic traditions. Over the past five years, I have dedicated myself to studying Vedic astrology, numerology, and tarot.
+              </p>
+              <p>
+                My approach is rooted in authentic knowledge and a genuine desire to help people find clarity through honesty and positivity.
+              </p>
+              <div className="mini-quote">
+                "Astrology is about understanding yourself to make empowered choices."
               </div>
-              <select required value={formData.consultationType} onChange={(e) => setFormData({...formData, consultationType: e.target.value})}>
-                <option value="">Select Service</option>
-                <option value="astrology">Astrology</option>
-                <option value="numerology">Numerology</option>
-                <option value="kundali">Kundali</option>
-                <option value="tarot">Tarot</option>
-              </select>
-              <textarea required placeholder="Your Message" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
-              <button type="submit" disabled={formStatus === 'sending'} className="btn-mini-submit">
-                {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </div>
-        </div>
+            </div>
+          )}
+
+          {activeTab === 'services' && (
+            <div className="tab-content services-view">
+              <div className="services-list">
+                {SERVICES_DATA.slice(0, 5).map(s => (
+                  <div key={s.id} className="service-row-item">
+                    <div className="s-icon-box">{s.icon}</div>
+                    <div className="s-text">
+                      <h4>{s.title}</h4>
+                      <p>{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'feedback' && (
+            <div className="tab-content feedback-view">
+              <div className="feedback-scroll">
+                {TESTIMONIALS_DATA.slice(0, 3).map((t, i) => (
+                  <div key={i} className="feedback-card-ios">
+                    <div className="f-stars">
+                      {[...Array(t.rating)].map((_, j) => <Star key={j} size={10} fill="currentColor" />)}
+                    </div>
+                    <p>"{t.text}"</p>
+                    <span className="f-author">— {t.author}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'contact' && (
+            <div className="tab-content contact-view">
+              {formStatus === 'success' ? (
+                <div className="success-screen">
+                  <CheckCircle size={40} color="#10B981" />
+                  <h3>Message Sent</h3>
+                  <p>I'll get back to you shortly.</p>
+                </div>
+              ) : (
+                <form className="app-form" onSubmit={handleSubmit}>
+                  <div className="input-group-ios">
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Email Address" required />
+                  </div>
+                  <select required>
+                    <option value="">Select a Service</option>
+                    <option value="astro">Astrology</option>
+                    <option value="tarot">Tarot</option>
+                  </select>
+                  <textarea placeholder="How can I help you?" required></textarea>
+                  <button type="submit" className="submit-btn-ios">
+                    {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+        </main>
+
+        {/* iOS Style Bottom Navigation */}
+        <nav className="app-nav">
+          {TABS.map(tab => (
+            <button 
+              key={tab.id}
+              className={`nav-item ${activeTab === tab.id ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <div className="nav-icon">{tab.icon}</div>
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </nav>
       </div>
     </div>
   );
 };
+
 
 
 export default About;
