@@ -7,6 +7,7 @@ import Grainient from '../components/ui/Grainient';
 import Magnetic from '../components/ui/Magnetic';
 import SoftAurora from '../components/ui/SoftAurora';
 import LineWaves from '../components/ui/LineWaves';
+import rachnaPortrait from '../assets/rachna_portrait.png';
 import '../styles/about.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -191,7 +192,7 @@ const About = () => {
         <div className="about-journey-grid">
           <div className="journey-image-side">
             <div className="journey-image-wrapper">
-              <img src="/brain/5848c783-95bf-4302-9eef-8feca022af26/rachna_portrait_cinematic_1778390058723.png" alt="Rachna Kumari" />
+              <img src={rachnaPortrait} alt="Rachna Kumari" />
               <div className="image-decoration"></div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 /* ===================================
    About Page — Astro Rachna Kumari
-   Premium Cinematic Overhaul
+   Premium Locked Layout Overhaul
    =================================== */
 
 .about-page {
@@ -71,6 +71,7 @@
   z-index: 1;
   text-align: center;
   max-width: 900px;
+  width: 100%;
 }
 
 .about-hero-badge {
@@ -112,11 +113,13 @@
   font-family: var(--font-heading);
 }
 
+/* Locked Stats Grid */
 .about-stats-row {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Locked to 3 columns */
   gap: 5rem;
-  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .about-stat {
@@ -252,7 +255,7 @@
 
 .about-services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* Locked to 3 columns */
   gap: 2rem;
   margin-top: 4rem;
 }
@@ -265,6 +268,7 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   height: 420px;
+  aspect-ratio: 3 / 4.2; /* Proportional locked shape */
 }
 
 .service-card .border-glow-inner {
@@ -317,6 +321,10 @@
   padding: 5rem;
   background: #0d0d12;
   border: 1px solid rgba(108, 99, 255, 0.2);
+  aspect-ratio: 16 / 9; /* Proportional landscape lock */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .consultation-glass-bg {
@@ -366,7 +374,7 @@
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* Locked to 2 columns */
   gap: 2rem;
   margin-top: 4rem;
 }
@@ -376,10 +384,14 @@
   background: rgba(255, 255, 255, 0.02);
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  aspect-ratio: 16 / 10; /* Locked rectangular shape */
 }
 
 .testimonial-card .border-glow-inner {
   padding: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ---- Contact Hub ---- */
@@ -465,28 +477,109 @@
   letter-spacing: 1px;
 }
 
-/* ---- Responsive ---- */
+/* ========================================
+   RESPONSIVE — Proportional VW Scaling
+   ======================================== */
+
 @media (max-width: 1024px) {
   .about-journey-grid {
     grid-template-columns: 1fr;
     gap: 4rem;
   }
-  .about-services-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (max-width: 768px) {
-  .about-hero { padding: 6rem 0 3rem; }
-  .about-stats-row { gap: 2rem; }
-  .about-stat-number { font-size: 2.5rem; }
-  .about-title { font-size: 3.5rem; }
-  .journey-text-side h2 { font-size: 2.5rem; }
-  .about-services-grid { grid-template-columns: 1fr; }
-  .testimonial-grid { grid-template-columns: 1fr; }
-  .consultation-card { padding: 3rem 1.5rem; }
-  .consultation-content h2 { font-size: 2.2rem; }
-  .contact-form-content { padding: 3rem 1.5rem; }
-  .premium-form .form-row { grid-template-columns: 1fr; }
+  /* Hero Stats Locked to 3 columns on mobile */
+  .about-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vw;
+    max-width: 100%;
+    padding: 0 4vw;
+  }
+  .about-stat-number { font-size: 6vw; }
+  .about-stat-label { font-size: 1.8vw; letter-spacing: 0.5vw; }
+
+  /* Services Grid Locked to 3 columns on mobile */
+  .about-services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5vw;
+  }
+  .service-card {
+    padding: 0;
+    border-radius: 3vw;
+    height: auto;
+  }
+  .service-card .border-glow-inner {
+    padding: 3vw 1.5vw;
+  }
+  .service-icon {
+    width: 8vw;
+    height: 8vw;
+    margin-bottom: 2vw;
+    border-radius: 1.5vw;
+  }
+  .service-icon svg {
+    width: 4vw;
+    height: 4vw;
+  }
+  .service-card h3 {
+    font-size: 2.8vw;
+    margin-bottom: 1vw;
+  }
+  .service-card p {
+    font-size: 1.8vw;
+    line-height: 1.3;
+  }
+
+  /* Testimonials Grid Locked to 2 columns on mobile */
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5vw;
+  }
+  .testimonial-card {
+    border-radius: 3vw;
+  }
+  .testimonial-card .border-glow-inner {
+    padding: 3vw 2vw;
+  }
+  .testimonial-card p {
+    font-size: 1.8vw;
+    line-height: 1.4;
+    margin-bottom: 1.5vw;
+  }
+  .testimonial-author {
+    font-size: 1.6vw;
+  }
+
+  /* Consultation & Form */
+  .consultation-card {
+    padding: 4vw;
+    border-radius: 5vw;
+    aspect-ratio: auto;
+    min-height: 40vw;
+  }
+  .consultation-content h2 { font-size: 6vw; }
+  .consultation-content p { font-size: 3vw; margin-bottom: 4vw; }
+  
+  .contact-form-content {
+    padding: 6vw 4vw;
+  }
+  .premium-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 3vw;
+  }
+  .premium-form label { font-size: 2.5vw; }
+  .premium-form input, .premium-form select, .premium-form textarea {
+    padding: 3vw;
+    font-size: 3.5vw;
+    border-radius: 2vw;
+  }
+  .btn-submit { height: 12vw; font-size: 4vw; border-radius: 2vw; }
+}
+
+@media (max-width: 480px) {
+  .about-title { font-size: 10vw; }
+  .about-hero .about-subtitle { font-size: 4vw; padding: 0 5vw; }
+  .journey-text-side h2 { font-size: 8vw; }
 }
 
