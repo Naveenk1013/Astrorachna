@@ -21,12 +21,87 @@ import imgRemedies from '../assets/services/remedies.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Move static data outside component to prevent re-creation on every render
+const SERVICES_DATA = [
+  { 
+    id: 'astrology',
+    icon: <Sun size={24} />, 
+    title: 'Astrology', 
+    desc: 'Detailed birth chart analysis and planetary insights to understand your life patterns and cosmic influences.',
+    colors: { color1: '#F5F3FF', color2: '#EDE9FF', color3: '#FDF4FF' },
+    image: imgAstrology
+  },
+  { 
+    id: 'numerology',
+    icon: <Moon size={24} />, 
+    title: 'Numerology', 
+    desc: 'Discover the hidden meaning of numbers in your life and how they shape your destiny and personality.',
+    colors: { color1: '#F0FDFA', color2: '#E0F2FE', color3: '#FDF4FF' },
+    image: imgNumerology
+  },
+  { 
+    id: 'kundali',
+    icon: <Users size={24} />, 
+    title: 'Kundali Analysis', 
+    desc: 'Traditional Vedic chart matching and comprehensive analysis for marriage and partnership compatibility.',
+    colors: { color1: '#FFF1F2', color2: '#FFF7ED', color3: '#FDF4FF' },
+    image: imgKundali
+  },
+  { 
+    id: 'tarot',
+    icon: <Sparkle size={24} />, 
+    title: 'Tarot Reading', 
+    desc: 'Intuitive card spreads to provide clarity on your current situations and guidance for your immediate future.',
+    colors: { color1: '#F8FAFC', color2: '#F1F5F9', color3: '#FDF4FF' },
+    image: imgTarot
+  },
+  { 
+    id: 'career',
+    icon: <TrendingUp size={24} />, 
+    title: 'Career Guidance', 
+    desc: 'Identify the best professional paths and timing for career growth based on your astrological markers.',
+    colors: { color1: '#ECFDF5', color2: '#F0F9FF', color3: '#FDF4FF' },
+    image: imgCareer
+  },
+  { 
+    id: 'marriage',
+    icon: <Heart size={24} />, 
+    title: 'Marriage & Love', 
+    desc: 'Insights into your relationship dynamics, emotional needs, and the best timing for significant life commitments.',
+    colors: { color1: '#FFF5F7', color2: '#FFF0F6', color3: '#FDF4FF' },
+    image: imgMarriage
+  },
+  { 
+    id: 'remedies',
+    icon: <Gem size={24} />, 
+    title: 'Remedial Measures', 
+    desc: 'Practical suggestions and logical solutions to balance negative planetary influences and enhance positive ones.',
+    colors: { color1: '#F5F3FF', color2: '#FAF5FF', color3: '#FDF4FF' },
+    image: imgRemedies
+  },
+];
+
+const TESTIMONIALS_DATA = [
+  { text: 'Rachna ji\'s guidance helped me make a life-changing career decision. Her readings are incredibly accurate and her approach is very calming.', author: 'Priya S.', rating: 5 },
+  { text: 'I was skeptical at first, but the kundali analysis was spot on. She explained everything with such clarity and patience. Highly recommended!', author: 'Amit K.', rating: 5 },
+  { text: 'The tarot reading gave me so much clarity about my relationship. Rachna ji is genuine, honest, and truly gifted.', author: 'Sneha M.', rating: 5 },
+  { text: 'Her numerology session opened my eyes to patterns I never noticed. Professional, warm, and deeply knowledgeable.', author: 'Rahul D.', rating: 5 },
+];
+
+
 const About = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', consultationType: '' });
-  const [formStatus, setFormStatus] = useState('idle'); // idle | sending | success | error
+  const [formStatus, setFormStatus] = useState('idle');
+
+  const sectionRef = useRef(null);
+  const heroRef = useRef(null);
+  const statsRef = useRef(null);
+  const journeyRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formStatus === 'sending') return;
+    
     setFormStatus('sending');
     try {
       const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
@@ -45,86 +120,17 @@ const About = () => {
     }
   };
 
-  const services = [
-    { 
-      icon: <Sun size={24} />, 
-      title: 'Astrology', 
-      desc: 'Detailed birth chart analysis and planetary insights to understand your life patterns and cosmic influences.',
-      colors: { color1: '#F5F3FF', color2: '#EDE9FF', color3: '#FDF4FF' },
-      image: imgAstrology
-    },
-    { 
-      icon: <Moon size={24} />, 
-      title: 'Numerology', 
-      desc: 'Discover the hidden meaning of numbers in your life and how they shape your destiny and personality.',
-      colors: { color1: '#F0FDFA', color2: '#E0F2FE', color3: '#FDF4FF' },
-      image: imgNumerology
-    },
-    { 
-      icon: <Users size={24} />, 
-      title: 'Kundali Analysis', 
-      desc: 'Traditional Vedic chart matching and comprehensive analysis for marriage and partnership compatibility.',
-      colors: { color1: '#FFF1F2', color2: '#FFF7ED', color3: '#FDF4FF' },
-      image: imgKundali
-    },
-    { 
-      icon: <Sparkle size={24} />, 
-      title: 'Tarot Reading', 
-      desc: 'Intuitive card spreads to provide clarity on your current situations and guidance for your immediate future.',
-      colors: { color1: '#F8FAFC', color2: '#F1F5F9', color3: '#FDF4FF' },
-      image: imgTarot
-    },
-    { 
-      icon: <TrendingUp size={24} />, 
-      title: 'Career Guidance', 
-      desc: 'Identify the best professional paths and timing for career growth based on your astrological markers.',
-      colors: { color1: '#ECFDF5', color2: '#F0F9FF', color3: '#FDF4FF' },
-      image: imgCareer
-    },
-    { 
-      icon: <Heart size={24} />, 
-      title: 'Marriage & Love', 
-      desc: 'Insights into your relationship dynamics, emotional needs, and the best timing for significant life commitments.',
-      colors: { color1: '#FFF5F7', color2: '#FFF0F6', color3: '#FDF4FF' },
-      image: imgMarriage
-    },
-    { 
-      icon: <Gem size={24} />, 
-      title: 'Remedial Measures', 
-      desc: 'Practical suggestions and logical solutions to balance negative planetary influences and enhance positive ones.',
-      colors: { color1: '#F5F3FF', color2: '#FAF5FF', color3: '#FDF4FF' },
-      image: imgRemedies
-    },
-  ];
-
-
-
-
-  const testimonials = [
-    { text: 'Rachna ji\'s guidance helped me make a life-changing career decision. Her readings are incredibly accurate and her approach is very calming.', author: 'Priya S.', rating: 5 },
-    { text: 'I was skeptical at first, but the kundali analysis was spot on. She explained everything with such clarity and patience. Highly recommended!', author: 'Amit K.', rating: 5 },
-    { text: 'The tarot reading gave me so much clarity about my relationship. Rachna ji is genuine, honest, and truly gifted.', author: 'Sneha M.', rating: 5 },
-    { text: 'Her numerology session opened my eyes to patterns I never noticed. Professional, warm, and deeply knowledgeable.', author: 'Rahul D.', rating: 5 },
-  ];
-
-  const sectionRef = useRef(null);
-  const heroRef = useRef(null);
-  const statsRef = useRef(null);
-  const journeyRef = useRef(null);
-  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
-
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero Animation
-      gsap.from('.about-hero-content > *', {
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 1.2,
-        ease: 'power4.out'
-      });
+      // Create a master timeline for hero
+      const tl = gsap.timeline();
+      
+      tl.from('.about-hero-badge', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' })
+        .from('.about-title', { opacity: 0, y: 30, duration: 1, ease: 'power4.out' }, '-=0.5')
+        .from('.about-subtitle', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+        .from('.about-stat', { opacity: 0, y: 20, stagger: 0.15, duration: 0.8, ease: 'power3.out' }, '-=0.4');
 
-      // Stats Counting
+      // Stats Counting with better trigger sync
       gsap.from('.stat-number-value', {
         textContent: 0,
         duration: 2,
@@ -132,19 +138,22 @@ const About = () => {
         snap: { textContent: 1 },
         scrollTrigger: {
           trigger: statsRef.current,
-          start: 'top 85%',
+          start: 'top 90%',
+          once: true
         }
       });
 
-      // Section Reveals
-      gsap.utils.toArray('.reveal-section').forEach((section) => {
+      // Section Reveals with proper Batching for better performance
+      const reveals = gsap.utils.toArray('.reveal-section');
+      reveals.forEach((section) => {
         gsap.from(section, {
-          y: 60,
+          y: 40,
           opacity: 0,
-          duration: 1,
+          duration: 1.2,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%',
+            start: 'top 85%',
             toggleActions: 'play none none none'
           }
         });
@@ -153,6 +162,9 @@ const About = () => {
 
     return () => ctx.revert();
   }, []);
+
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
+
 
   return (
     <div className="about-page" ref={sectionRef}>
@@ -251,9 +263,9 @@ const About = () => {
           </div>
 
           <div className="about-services-grid">
-            {services.map((service, i) => (
+            {SERVICES_DATA.map((service) => (
               <BorderGlow
-                key={i}
+                key={service.id}
                 className="service-card"
                 edgeSensitivity={30}
                 glowColor="108 99 255"
@@ -264,7 +276,7 @@ const About = () => {
                 animated={false}
               >
                 <div className="service-card-bg">
-                  <img src={service.image} alt={service.title} className="service-card-img" />
+                  <img src={service.image} alt={service.title} className="service-card-img" loading="lazy" />
                   <Grainient 
                     {...service.colors}
                     timeSpeed={0.45}
@@ -277,15 +289,15 @@ const About = () => {
                   <div className="service-card-overlay"></div>
                 </div>
 
-
                 <div className="service-icon-wrapper">
-                  <div className="service-icon">{service.icon}</div>
+                  <div className="service-icon" aria-hidden="true">{service.icon}</div>
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
               </BorderGlow>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -323,7 +335,7 @@ const About = () => {
         </div>
 
         <div className="testimonial-grid">
-          {testimonials.map((t, i) => (
+          {TESTIMONIALS_DATA.map((t, i) => (
             <BorderGlow
               key={i}
               className="testimonial-card"
@@ -394,24 +406,49 @@ const About = () => {
                 <CheckCircle size={48} className="success-icon" />
                 <h3>Message Sent Successfully!</h3>
                 <p>Thank you for reaching out. I will get back to you within 24–48 hours.</p>
-                <button onClick={() => setFormStatus('idle')} className="btn btn-outline">Send Another</button>
+                <button 
+                  type="button" 
+                  onClick={() => setFormStatus('idle')} 
+                  className="btn btn-outline"
+                >
+                  Send Another
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="premium-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label><Users size={16} /> Full Name</label>
-                    <input type="text" required placeholder="Aria Star" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                    <label htmlFor="form-name"><Users size={16} /> Full Name</label>
+                    <input 
+                      id="form-name"
+                      type="text" 
+                      required 
+                      placeholder="Aria Star" 
+                      value={formData.name} 
+                      onChange={(e) => setFormData({...formData, name: e.target.value})} 
+                    />
                   </div>
                   <div className="form-group">
-                    <label><Mail size={16} /> Email</label>
-                    <input type="email" required placeholder="aria@cosmos.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                    <label htmlFor="form-email"><Mail size={16} /> Email</label>
+                    <input 
+                      id="form-email"
+                      type="email" 
+                      required 
+                      placeholder="aria@cosmos.com" 
+                      value={formData.email} 
+                      onChange={(e) => setFormData({...formData, email: e.target.value})} 
+                    />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label><Compass size={16} /> Consultation Type</label>
-                  <select required value={formData.consultationType} onChange={(e) => setFormData({...formData, consultationType: e.target.value})}>
+                  <label htmlFor="form-consultation"><Compass size={16} /> Consultation Type</label>
+                  <select 
+                    id="form-consultation"
+                    required 
+                    value={formData.consultationType} 
+                    onChange={(e) => setFormData({...formData, consultationType: e.target.value})}
+                  >
                     <option value="">Select a service</option>
                     <option value="astrology">Astrology Analysis</option>
                     <option value="numerology">Numerology Insights</option>
@@ -424,23 +461,35 @@ const About = () => {
                 </div>
 
                 <div className="form-group">
-                  <label><MessageCircle size={16} /> Your Message</label>
-                  <textarea required placeholder="How can I help you navigate your journey?" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
+                  <label htmlFor="form-message"><MessageCircle size={16} /> Your Message</label>
+                  <textarea 
+                    id="form-message"
+                    required 
+                    placeholder="How can I help you navigate your journey?" 
+                    value={formData.message} 
+                    onChange={(e) => setFormData({...formData, message: e.target.value})} 
+                  />
                 </div>
 
                 <Magnetic strength={10}>
-                  <button type="submit" className="btn btn-primary btn-submit" disabled={formStatus === 'sending'}>
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary btn-submit" 
+                    disabled={formStatus === 'sending'}
+                    aria-label={formStatus === 'sending' ? 'Sending Message' : 'Submit Contact Form'}
+                  >
                     <Send size={18} /> {formStatus === 'sending' ? 'Sending Magic...' : 'Send Message'}
                   </button>
                 </Magnetic>
                 
                 {formStatus === 'error' && (
-                  <p className="form-error-msg">
+                  <p className="form-error-msg" role="alert">
                     Something went wrong. Please try again later.
                   </p>
                 )}
               </form>
             )}
+
           </div>
         </div>
       </section>
