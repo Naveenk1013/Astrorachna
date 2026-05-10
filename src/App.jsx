@@ -67,7 +67,7 @@ function AppContent() {
       </div>
 
       {/* Navigation — Layered above bg */}
-      <nav className="main-nav" style={{ position: 'relative', zIndex: 10 }}>
+      <nav className="main-nav">
         <div className="container nav-container">
           <Link to="/" className="nav-logo">
             <span className="logo-symbol"><Sparkle size={20} /></span>
