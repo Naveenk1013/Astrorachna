@@ -90,7 +90,6 @@ const TESTIMONIALS_DATA = [
 
 
 const About = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', consultationType: '' });
   const [formStatus, setFormStatus] = useState('idle');
   const containerRef = useRef(null);
 
