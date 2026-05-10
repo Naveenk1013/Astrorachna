@@ -10,6 +10,15 @@ import LineWaves from '../components/ui/LineWaves';
 import rachnaPortrait from '../assets/rachna_portrait.png';
 import '../styles/about.css';
 
+// Import Service Images
+import imgAstrology from '../assets/services/astrology.png';
+import imgNumerology from '../assets/services/numerology.png';
+import imgKundali from '../assets/services/kundali.png';
+import imgTarot from '../assets/services/tarot.png';
+import imgCareer from '../assets/services/career.png';
+import imgMarriage from '../assets/services/marriage.png';
+import imgRemedies from '../assets/services/remedies.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
@@ -41,45 +50,53 @@ const About = () => {
       icon: <Sun size={24} />, 
       title: 'Astrology', 
       desc: 'Detailed birth chart analysis and planetary insights to understand your life patterns and cosmic influences.',
-      colors: { color1: '#F5F3FF', color2: '#EDE9FF', color3: '#FDF4FF' } // Subtle Lavender
+      colors: { color1: '#F5F3FF', color2: '#EDE9FF', color3: '#FDF4FF' },
+      image: imgAstrology
     },
     { 
       icon: <Moon size={24} />, 
       title: 'Numerology', 
       desc: 'Discover the hidden meaning of numbers in your life and how they shape your destiny and personality.',
-      colors: { color1: '#F0FDFA', color2: '#E0F2FE', color3: '#FDF4FF' } // Subtle Cyan/Blue
+      colors: { color1: '#F0FDFA', color2: '#E0F2FE', color3: '#FDF4FF' },
+      image: imgNumerology
     },
     { 
       icon: <Users size={24} />, 
       title: 'Kundali Analysis', 
       desc: 'Traditional Vedic chart matching and comprehensive analysis for marriage and partnership compatibility.',
-      colors: { color1: '#FFF1F2', color2: '#FFF7ED', color3: '#FDF4FF' } // Subtle Rose/Amber
+      colors: { color1: '#FFF1F2', color2: '#FFF7ED', color3: '#FDF4FF' },
+      image: imgKundali
     },
     { 
       icon: <Sparkle size={24} />, 
       title: 'Tarot Reading', 
       desc: 'Intuitive card spreads to provide clarity on your current situations and guidance for your immediate future.',
-      colors: { color1: '#F8FAFC', color2: '#F1F5F9', color3: '#FDF4FF' } // Subtle Slate/Grey
+      colors: { color1: '#F8FAFC', color2: '#F1F5F9', color3: '#FDF4FF' },
+      image: imgTarot
     },
     { 
       icon: <TrendingUp size={24} />, 
       title: 'Career Guidance', 
       desc: 'Identify the best professional paths and timing for career growth based on your astrological markers.',
-      colors: { color1: '#ECFDF5', color2: '#F0F9FF', color3: '#FDF4FF' } // Subtle Emerald/Blue
+      colors: { color1: '#ECFDF5', color2: '#F0F9FF', color3: '#FDF4FF' },
+      image: imgCareer
     },
     { 
       icon: <Heart size={24} />, 
       title: 'Marriage & Love', 
       desc: 'Insights into your relationship dynamics, emotional needs, and the best timing for significant life commitments.',
-      colors: { color1: '#FFF5F7', color2: '#FFF0F6', color3: '#FDF4FF' } // Subtle Pink
+      colors: { color1: '#FFF5F7', color2: '#FFF0F6', color3: '#FDF4FF' },
+      image: imgMarriage
     },
     { 
       icon: <Gem size={24} />, 
       title: 'Remedial Measures', 
       desc: 'Practical suggestions and logical solutions to balance negative planetary influences and enhance positive ones.',
-      colors: { color1: '#F5F3FF', color2: '#FAF5FF', color3: '#FDF4FF' } // Subtle Purple
+      colors: { color1: '#F5F3FF', color2: '#FAF5FF', color3: '#FDF4FF' },
+      image: imgRemedies
     },
   ];
+
 
 
 
@@ -247,6 +264,7 @@ const About = () => {
                 animated={false}
               >
                 <div className="service-card-bg">
+                  <img src={service.image} alt={service.title} className="service-card-img" />
                   <Grainient 
                     {...service.colors}
                     timeSpeed={0.45}
@@ -256,7 +274,9 @@ const About = () => {
                     grainAmount={0.06}
                     zoom={1.2}
                   />
+                  <div className="service-card-overlay"></div>
                 </div>
+
 
                 <div className="service-icon-wrapper">
                   <div className="service-icon">{service.icon}</div>
@@ -309,18 +329,31 @@ const About = () => {
               className="testimonial-card"
               edgeSensitivity={30}
               glowColor="108 99 255"
-              backgroundColor="var(--color-bg-card)"
+              backgroundColor="transparent"
               borderRadius={24}
               glowRadius={30}
               glowIntensity={1.0}
               animated={false}
             >
-              <div className="testimonial-stars">
-                {[...Array(t.rating)].map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
+              <div className="testimonial-card-bg">
+                <Grainient 
+                  color1="#F5F3FF"
+                  color2="#EDE9FF"
+                  color3="#FDF4FF"
+                  timeSpeed={0.2}
+                  warpSpeed={2.0}
+                  grainAmount={0.05}
+                />
               </div>
-              <p>"{t.text}"</p>
-              <span className="testimonial-author">— {t.author}</span>
+              <div className="testimonial-content">
+                <div className="testimonial-stars">
+                  {[...Array(t.rating)].map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
+                </div>
+                <p>"{t.text}"</p>
+                <span className="testimonial-author">— {t.author}</span>
+              </div>
             </BorderGlow>
+
           ))}
         </div>
       </section>

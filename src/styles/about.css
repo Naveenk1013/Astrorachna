@@ -488,13 +488,65 @@
   }
 }
 
+/* Service Card Image & Overlay */
+.service-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  z-index: -1;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.1);
+  opacity: 0.6;
+}
+
+.service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 12, 0.9) 0%, rgba(10, 10, 12, 0.2) 100%);
+  z-index: 0;
+}
+
+/* Testimonial Card BG & Content */
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.testimonial-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+.testimonial-content {
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 768px) {
+  /* Fix Mobile Padding (Left/Right margins) */
+  .container {
+    padding: 0 5vw !important;
+  }
+
+  .about-hero {
+    padding: 6rem 0 3rem;
+  }
+
   /* Hero Stats Locked to 3 columns on mobile */
   .about-stats-row {
     grid-template-columns: repeat(3, 1fr);
     gap: 2vw;
     max-width: 100%;
-    padding: 0 4vw;
+    margin: 0;
   }
   .about-stat-number { font-size: 6vw; }
   .about-stat-label { font-size: 1.8vw; letter-spacing: 0.5vw; }
@@ -582,4 +634,5 @@
   .about-hero .about-subtitle { font-size: 4vw; padding: 0 5vw; }
   .journey-text-side h2 { font-size: 8vw; }
 }
+
 
