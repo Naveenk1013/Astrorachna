@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Sparkle, Sparkles, AlertCircle, Mail, MessageCircle, Link as LinkIcon, Video } from 'lucide-react';
 import CustomCursor from './components/ui/CustomCursor';
 import SmoothScroller from './components/layout/SmoothScroller';
@@ -18,7 +18,8 @@ import './styles/home.css';
 import './styles/landing.css';
 import './styles/about.css';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isTouchDevice] = useState(
     typeof window !== 'undefined' ? window.matchMedia("(pointer: coarse)").matches : false
@@ -32,122 +33,119 @@ function App() {
     { to: '/birth-card', label: 'Birth Cards' },
   ];
 
+  const showFooter = location.pathname !== '/about';
+
   return (
-    <Router>
-      <div className="App">
-        <CustomCursor />
-        {/* WebGL background — desktop only for performance */}
-        {!isTouchDevice && (
-          <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
-            <Grainient
-              color1="#FF9FFC"
-              color2="#5227FF"
-              color3="#B497CF"
-              timeSpeed={1.25}
-              colorBalance={0}
-              warpStrength={1}
-              warpFrequency={5}
-              warpSpeed={2}
-              warpAmplitude={50}
-              blendAngle={0}
-              blendSoftness={0.5}
-              rotationAmount={500}
-              noiseScale={2}
-              grainAmount={0.1}
-              grainScale={2}
-              grainAnimated={false}
-              contrast={1.5}
-              gamma={1}
-              saturation={1}
-              centerX={0}
-              centerY={0}
-              zoom={0.9}
-            />
+    <div className="App">
+      <CustomCursor />
+      {/* WebGL background — desktop only for performance */}
+      {!isTouchDevice && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
+          <Grainient
+            color1="#FF9FFC"
+            color2="#5227FF"
+            color3="#B497CF"
+            timeSpeed={1.25}
+            colorBalance={0}
+            warpStrength={1}
+            warpFrequency={5}
+            warpSpeed={2}
+            warpAmplitude={50}
+            blendAngle={0}
+            blendSoftness={0.5}
+            rotationAmount={500}
+            noiseScale={2}
+            grainAmount={0.1}
+            grainScale={2}
+            grainAnimated={false}
+            contrast={1.5}
+            gamma={1}
+            saturation={1}
+            centerX={0}
+            centerY={0}
+            zoom={0.9}
+          />
+        </div>
+      )}
+      {/* CSS gradient fallback for mobile */}
+      {isTouchDevice && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none', background: 'linear-gradient(135deg, #FDF4FF 0%, #EDE9FF 40%, #FFF0F5 70%, #FFF8EE 100%)' }} />
+      )}
+      {/* Navigation */}
+      <nav className="main-nav">
+        <div className="container nav-container">
+          <Link to="/" className="nav-logo">
+            <span className="logo-symbol"><Sparkle size={20} /></span>
+            <span className="logo-text">Rachna</span>
+          </Link>
 
-
-          </div>
-        )}
-        {/* CSS gradient fallback for mobile */}
-        {isTouchDevice && (
-          <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none', background: 'linear-gradient(135deg, #FDF4FF 0%, #EDE9FF 40%, #FFF0F5 70%, #FFF8EE 100%)' }} />
-        )}
-        {/* Navigation */}
-        <nav className="main-nav">
-          <div className="container nav-container">
-            <Link to="/" className="nav-logo">
-              <span className="logo-symbol"><Sparkle size={20} /></span>
-              <span className="logo-text">Rachna</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="nav-links desktop-nav">
-              {navLinks.map(link => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
-
-            <Link to="/reading" className="nav-cta desktop-nav">
-              <Sparkles size={14} />
-              Free Reading
-            </Link>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              className="mobile-menu-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}></span>
-            </button>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
+          {/* Desktop Navigation */}
+          <div className="nav-links desktop-nav">
             {navLinks.map(link => (
               <NavLink
                 key={link.to}
                 to={link.to}
-                className={({ isActive }) => isActive ? 'mobile-nav-link active' : 'mobile-nav-link'}
-                onClick={() => setMobileMenuOpen(false)}
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
               >
                 {link.label}
               </NavLink>
             ))}
-            <Link
-              to="/reading"
-              className="btn btn-primary mobile-cta"
+          </div>
+
+          <Link to="/reading" className="nav-cta desktop-nav">
+            <Sparkles size={14} />
+            Free Reading
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}></span>
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
+          {navLinks.map(link => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => isActive ? 'mobile-nav-link active' : 'mobile-nav-link'}
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Sparkles size={14} />
-              Free Reading
-            </Link>
-          </div>
-        </nav>
+              {link.label}
+            </NavLink>
+          ))}
+          <Link
+            to="/reading"
+            className="btn btn-primary mobile-cta"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Sparkles size={14} />
+            Free Reading
+          </Link>
+        </div>
+      </nav>
 
-        {/* Routes wrapped in smooth scroll */}
-        <main>
-          <SmoothScroller>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/learn" element={<LearnHub />} />
+      {/* Routes wrapped in smooth scroll */}
+      <main>
+        <SmoothScroller>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/learn" element={<LearnHub />} />
+            <Route path="/reading" element={<Reading />} />
+            <Route path="/birth-card" element={<BirthCard />} />
+          </Routes>
+        </SmoothScroller>
+      </main>
 
-
-              <Route path="/reading" element={<Reading />} />
-              <Route path="/birth-card" element={<BirthCard />} />
-            </Routes>
-          </SmoothScroller>
-        </main>
-
-        {/* Footer */}
+      {/* Conditional Footer */}
+      {showFooter && (
         <footer className="main-footer">
-          {/* LineWaves Background — desktop only */}
           {!isTouchDevice && (
             <div className="footer-waves-bg">
               <LineWaves
@@ -169,7 +167,6 @@ function App() {
           )}
 
           <div className="container">
-            {/* Top: Brand + Tagline */}
             <div className="footer-top">
               <Link to="/" className="nav-logo footer-logo">
                 <span className="logo-symbol"><Sparkles size={28} /></span>
@@ -180,12 +177,9 @@ function App() {
               </p>
             </div>
 
-            {/* Divider */}
             <div className="footer-divider" />
 
-            {/* Main Grid */}
             <div className="footer-grid">
-              {/* Brand Column */}
               <div className="footer-brand">
                 <p className="footer-mission">
                   Guiding lives with authenticity, clarity, and cosmic wisdom through the fusion of ancient tradition and logical insight.
@@ -198,7 +192,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Services Column */}
               <div className="footer-links">
                 <h4>Cosmic Services</h4>
                 <Magnetic strength={10}><Link to="/reading">Tarot Reading</Link></Magnetic>
@@ -207,7 +200,6 @@ function App() {
                 <Magnetic strength={10}><Link to="/learn">Kundali Analysis</Link></Magnetic>
               </div>
 
-              {/* Explorations Column */}
               <div className="footer-links">
                 <h4>Explorations</h4>
                 <Magnetic strength={10}><Link to="/learn">Why it Works</Link></Magnetic>
@@ -216,7 +208,6 @@ function App() {
                 <Magnetic strength={10}><Link to="/learn">Learning Hub</Link></Magnetic>
               </div>
 
-              {/* Support Column */}
               <div className="footer-links">
                 <h4>Support & Legal</h4>
                 <Magnetic strength={10}><Link to="/about">About Rachna</Link></Magnetic>
@@ -226,7 +217,6 @@ function App() {
               </div>
             </div>
 
-            {/* Bottom Bar */}
             <div className="footer-bottom">
               <p className="footer-copyright">
                 © 2026 Rachna Kumari. Crafted for the Cosmos.
@@ -238,11 +228,18 @@ function App() {
             </div>
           </div>
         </footer>
+      )}
+    </div>
+  );
+}
 
-
-      </div>
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
+
 
 export default App;

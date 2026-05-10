@@ -90,162 +90,118 @@ const TESTIMONIALS_DATA = [
 
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState('story');
   const [formData, setFormData] = useState({ name: '', email: '', message: '', consultationType: '' });
   const [formStatus, setFormStatus] = useState('idle');
-
   const containerRef = useRef(null);
-  const contentRef = useRef(null);
-
-  const TABS = [
-    { id: 'story', label: 'My Story', icon: <BookOpen size={18} /> },
-    { id: 'services', label: 'Services', icon: <Sun size={18} /> },
-    { id: 'feedback', label: 'Feedback', icon: <Users size={18} /> },
-    { id: 'contact', label: 'Contact', icon: <Mail size={18} /> },
-  ];
 
   useEffect(() => {
-    // Transition animation when tab changes
-    gsap.fromTo(contentRef.current, 
-      { opacity: 0, y: 10, filter: 'blur(10px)' },
-      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'power3.out' }
-    );
-  }, [activeTab]);
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.5 } });
+      tl.from('.cinematic-portrait', { scale: 1.1, filter: 'blur(20px)', opacity: 0 })
+        .from('.poster-title', { y: 100, opacity: 0, skewY: 5 }, '-=1')
+        .from('.poster-content-block', { x: 50, opacity: 0, stagger: 0.2 }, '-=1.2')
+        .from('.poster-stat-item', { scale: 0, opacity: 0, stagger: 0.1 }, '-=1');
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('sending');
-    // Simulated or actual fetch here...
     setTimeout(() => setFormStatus('success'), 1500);
   };
 
   return (
-    <div className="about-app-container" ref={containerRef}>
-      {/* Cinematic Background */}
-      <div className="app-bg-glow">
-        <div className="glow-orb g-1"></div>
-        <div className="glow-orb g-2"></div>
+    <div className="about-poster-container" ref={containerRef}>
+      {/* Background Micro-layers */}
+      <div className="poster-bg-layers">
+        <div className="light-leak l-1"></div>
+        <div className="light-leak l-2"></div>
+        <div className="grain-overlay"></div>
       </div>
 
       <div className="about-hero-waves">
-        <LineWaves brightness={0.05} color1="#6C63FF" color2="#A78BFA" />
+        <LineWaves brightness={0.06} color1="#6C63FF" color2="#F472B6" warpIntensity={0.8} />
       </div>
 
-      <div className="apple-app-shell">
-        {/* Header Section */}
-        <header className="app-header">
-          <div className="profile-wrapper">
-            <div className="profile-img-ring">
-              <img src={rachnaPortrait} alt="Rachna Kumari" />
-            </div>
-            <div className="profile-meta">
-              <h1>Rachna Kumari</h1>
-              <span className="profile-tag">Professional Astrologer</span>
-            </div>
+      <div className="poster-layout">
+        {/* Left: Cinematic Visual Anchor */}
+        <div className="poster-visual-side">
+          <div className="cinematic-portrait">
+            <img src={rachnaPortrait} alt="Rachna Kumari" />
+            <div className="portrait-gradient-overlay"></div>
           </div>
-          
-          <div className="quick-stats-row">
-            <div className="q-stat"><strong>5+</strong><span>Years</span></div>
-            <div className="q-stat"><strong>1k+</strong><span>Clients</span></div>
-            <div className="q-stat"><strong>7</strong><span>Fields</span></div>
+          <div className="poster-stats-minimal">
+            <div className="poster-stat-item"><strong>5+</strong><span>Years</span></div>
+            <div className="poster-stat-item"><strong>1k+</strong><span>Clients</span></div>
+            <div className="poster-stat-item"><strong>7</strong><span>Specialties</span></div>
           </div>
-        </header>
+        </div>
 
-        {/* Dynamic Content Area */}
-        <main className="app-main-content" ref={contentRef}>
-          {activeTab === 'story' && (
-            <div className="tab-content story-view">
-              <div className="content-badge">Authenticity & Empathy</div>
-              <p>
-                My fascination with the stars began in childhood, woven into everyday life by Vedic traditions. Over the past five years, I have dedicated myself to studying Vedic astrology, numerology, and tarot.
-              </p>
-              <p>
-                My approach is rooted in authentic knowledge and a genuine desire to help people find clarity through honesty and positivity.
-              </p>
-              <div className="mini-quote">
-                "Astrology is about understanding yourself to make empowered choices."
-              </div>
+        {/* Right: Editorial Content */}
+        <div className="poster-content-side">
+          <header className="poster-header">
+            <div className="editorial-badge">Est. 2019</div>
+            <h1 className="poster-title">Astro <br/>Rachna <br/>Kumari</h1>
+          </header>
+
+          <div className="poster-body">
+            <div className="poster-content-block journey-block">
+              <h3>The Journey</h3>
+              <p>Dedicated to Vedic traditions, I blend ancient cosmic wisdom with modern empathy. 5 years of mastery in Astrology, Numerology, and Tarot, guiding souls toward their true potential.</p>
             </div>
-          )}
 
-          {activeTab === 'services' && (
-            <div className="tab-content services-view">
-              <div className="services-list">
-                {SERVICES_DATA.slice(0, 5).map(s => (
-                  <div key={s.id} className="service-row-item">
-                    <div className="s-icon-box">{s.icon}</div>
-                    <div className="s-text">
-                      <h4>{s.title}</h4>
-                      <p>{s.desc}</p>
-                    </div>
+            <div className="poster-content-block services-block">
+              <h3>What I Offer</h3>
+              <div className="minimal-service-grid">
+                {SERVICES_DATA.slice(0, 6).map(s => (
+                  <div key={s.id} className="mini-service-tag">
+                    <span className="tag-icon">{s.icon}</span>
+                    <span className="tag-name">{s.title}</span>
                   </div>
                 ))}
               </div>
             </div>
-          )}
 
-          {activeTab === 'feedback' && (
-            <div className="tab-content feedback-view">
-              <div className="feedback-scroll">
-                {TESTIMONIALS_DATA.slice(0, 3).map((t, i) => (
-                  <div key={i} className="feedback-card-ios">
-                    <div className="f-stars">
-                      {[...Array(t.rating)].map((_, j) => <Star key={j} size={10} fill="currentColor" />)}
-                    </div>
-                    <p>"{t.text}"</p>
-                    <span className="f-author">— {t.author}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'contact' && (
-            <div className="tab-content contact-view">
+            <div className="poster-content-block contact-block">
               {formStatus === 'success' ? (
-                <div className="success-screen">
-                  <CheckCircle size={40} color="#10B981" />
-                  <h3>Message Sent</h3>
-                  <p>I'll get back to you shortly.</p>
+                <div className="poster-success-msg">
+                  <CheckCircle size={24} /> <span>Consultation Request Sent.</span>
                 </div>
               ) : (
-                <form className="app-form" onSubmit={handleSubmit}>
-                  <div className="input-group-ios">
-                    <input type="text" placeholder="Your Name" required />
+                <form className="poster-form-minimal" onSubmit={handleSubmit}>
+                  <div className="p-form-row">
+                    <input type="text" placeholder="Full Name" required />
                     <input type="email" placeholder="Email Address" required />
                   </div>
-                  <select required>
-                    <option value="">Select a Service</option>
-                    <option value="astro">Astrology</option>
-                    <option value="tarot">Tarot</option>
-                  </select>
-                  <textarea placeholder="How can I help you?" required></textarea>
-                  <button type="submit" className="submit-btn-ios">
-                    {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-                  </button>
+                  <div className="p-form-row">
+                    <select required>
+                      <option value="">Service Type</option>
+                      <option value="astro">Astrology</option>
+                      <option value="tarot">Tarot</option>
+                    </select>
+                    <button type="submit" disabled={formStatus === 'sending'}>
+                      {formStatus === 'sending' ? 'Processing...' : 'Book Now'}
+                    </button>
+                  </div>
                 </form>
               )}
             </div>
-          )}
-        </main>
+          </div>
 
-        {/* iOS Style Bottom Navigation */}
-        <nav className="app-nav">
-          {TABS.map(tab => (
-            <button 
-              key={tab.id}
-              className={`nav-item ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              <div className="nav-icon">{tab.icon}</div>
-              <span>{tab.label}</span>
-            </button>
-          ))}
-        </nav>
+          <footer className="poster-footer">
+            <div className="social-minimal">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <span>/</span>
+              <a href="https://blogspot.com" target="_blank" rel="noopener noreferrer">Blog</a>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
   );
 };
+
 
 
 
