@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Sparkle, Sparkles, AlertCircle, Mail, MessageCircle, Link as LinkIcon, Video } from 'lucide-react';
 import CustomCursor from './components/ui/CustomCursor';
 import SmoothScroller from './components/layout/SmoothScroller';
