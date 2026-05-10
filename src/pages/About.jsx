@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sparkle, Star, Heart, BookOpen, Users, Clock, Video, Mail, MessageCircle, Send, CheckCircle, Globe, Compass, Sun, Moon, TrendingUp, Gem, Shield, Phone } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import BorderGlow from '../components/ui/BorderGlow';
 import Grainient from '../components/ui/Grainient';
+import Magnetic from '../components/ui/Magnetic';
+import SoftAurora from '../components/ui/SoftAurora';
+import LineWaves from '../components/ui/LineWaves';
 import '../styles/about.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', consultationType: '' });
@@ -82,53 +89,142 @@ const About = () => {
     { text: 'Her numerology session opened my eyes to patterns I never noticed. Professional, warm, and deeply knowledgeable.', author: 'Rahul D.', rating: 5 },
   ];
 
-  return (
-    <div className="about-page">
-      {/* Hero */}
-      <section className="about-hero container">
-        <div className="about-hero-badge">
-          <Sparkle size={14} /> Professional Astrologer & Spiritual Consultant
-        </div>
-        <h1>Astro Rachna Kumari</h1>
-        <p className="about-subtitle">Guiding lives with authenticity, clarity, and cosmic wisdom</p>
+  const sectionRef = useRef(null);
+  const heroRef = useRef(null);
+  const statsRef = useRef(null);
+  const journeyRef = useRef(null);
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
 
-        <div className="about-stats-row">
-          <div className="about-stat">
-            <span className="about-stat-number">5+</span>
-            <span className="about-stat-label">Years Experience</span>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero Animation
+      gsap.from('.about-hero-content > *', {
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1.2,
+        ease: 'power4.out'
+      });
+
+      // Stats Counting
+      gsap.from('.stat-number-value', {
+        textContent: 0,
+        duration: 2,
+        ease: 'power2.out',
+        snap: { textContent: 1 },
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: 'top 85%',
+        }
+      });
+
+      // Section Reveals
+      gsap.utils.toArray('.reveal-section').forEach((section) => {
+        gsap.from(section, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className="about-page" ref={sectionRef}>
+      {/* Background Micro-elements */}
+      <div className="about-bg-elements">
+        <div className="floating-orb orb-1"></div>
+        <div className="floating-orb orb-2"></div>
+      </div>
+
+      {/* Hero */}
+      <section className="about-hero" ref={heroRef}>
+        {!isTouchDevice && (
+          <div className="about-hero-waves">
+            <LineWaves
+              speed={0.15}
+              innerLineCount={24}
+              outerLineCount={28}
+              warpIntensity={0.6}
+              rotation={15}
+              brightness={0.12}
+              color1="#6C63FF"
+              color2="#A78BFA"
+              color3="#F472B6"
+            />
           </div>
-          <div className="about-stat">
-            <span className="about-stat-number">1000+</span>
-            <span className="about-stat-label">Clients Served</span>
+        )}
+        
+        <div className="container about-hero-content">
+          <div className="about-hero-badge">
+            <Sparkle size={14} /> Professional Astrologer & Spiritual Consultant
           </div>
-          <div className="about-stat">
-            <span className="about-stat-number">7</span>
-            <span className="about-stat-label">Specializations</span>
+          <h1 className="about-title">Astro Rachna Kumari</h1>
+          <p className="about-subtitle">Guiding lives with authenticity, clarity, and cosmic wisdom</p>
+
+          <div className="about-stats-row" ref={statsRef}>
+            <div className="about-stat">
+              <span className="about-stat-number"><span className="stat-number-value">5</span>+</span>
+              <span className="about-stat-label">Years Experience</span>
+            </div>
+            <div className="about-stat">
+              <span className="about-stat-number"><span className="stat-number-value">1000</span>+</span>
+              <span className="about-stat-label">Clients Served</span>
+            </div>
+            <div className="about-stat">
+              <span className="about-stat-number"><span className="stat-number-value">7</span></span>
+              <span className="about-stat-label">Specializations</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Journey */}
-      <section className="about-journey container">
-        <div className="about-journey-content">
-          <h2><BookOpen size={24} /> My Journey</h2>
-          <p>
-            My fascination with the stars began in childhood, growing up in a household where Vedic traditions and cosmic wisdom were woven into everyday life. What started as curiosity about planetary movements and birth charts gradually became a lifelong calling.
-          </p>
-          <p>
-            Over the past five years, I have dedicated myself to studying Vedic astrology, numerology, tarot, and kundali analysis under renowned mentors. Every consultation I offer is rooted in authentic knowledge, deep research, and a genuine desire to help people find clarity in their lives.
-          </p>
-          <blockquote>
-            "I believe astrology is not about predicting fate — it is about understanding yourself deeply enough to make empowered choices."
-          </blockquote>
-          <p>
-            My approach is simple: honesty, empathy, and positivity. I do not believe in fear-based readings. Instead, I focus on helping my clients understand their strengths, navigate challenges, and align with their true cosmic potential.
-          </p>
+      <section className="about-journey container reveal-section" ref={journeyRef}>
+        <div className="about-journey-grid">
+          <div className="journey-image-side">
+            <div className="journey-image-wrapper">
+              <img src="/brain/5848c783-95bf-4302-9eef-8feca022af26/rachna_portrait_cinematic_1778390058723.png" alt="Rachna Kumari" />
+              <div className="image-decoration"></div>
+            </div>
+          </div>
+          
+          <div className="journey-text-side">
+            <div className="journey-header">
+              <BookOpen size={24} className="journey-icon" />
+              <span className="journey-badge">Storytelling</span>
+              <h2>My Journey</h2>
+            </div>
+            
+            <p className="journey-lead">
+              My fascination with the stars began in childhood, growing up in a household where Vedic traditions and cosmic wisdom were woven into everyday life. 
+            </p>
+            
+            <p>
+              Over the past five years, I have dedicated myself to studying Vedic astrology, numerology, tarot, and kundali analysis under renowned mentors. Every consultation I offer is rooted in authentic knowledge and a genuine desire to help people find clarity.
+            </p>
+            
+            <div className="journey-quote-box">
+              <p>"I believe astrology is not about predicting fate — it is about understanding yourself deeply enough to make empowered choices."</p>
+            </div>
+
+            <p>
+              My approach is simple: honesty, empathy, and positivity. I do not believe in fear-based readings. Instead, I focus on helping my clients understand their strengths and align with their true cosmic potential.
+            </p>
+          </div>
         </div>
       </section>
 
+
       {/* Services */}
-      <section className="about-services">
+      <section className="about-services reveal-section">
         <div className="container">
           <div className="section-header">
             <span className="section-badge">What I Offer</span>
@@ -142,7 +238,7 @@ const About = () => {
                 key={i}
                 className="service-card"
                 edgeSensitivity={30}
-                glowColor="260 80 80"
+                glowColor="108 99 255"
                 backgroundColor="transparent"
                 borderRadius={24}
                 glowRadius={30}
@@ -161,7 +257,9 @@ const About = () => {
                   />
                 </div>
 
-                <div className="service-icon">{service.icon}</div>
+                <div className="service-icon-wrapper">
+                  <div className="service-icon">{service.icon}</div>
+                </div>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
               </BorderGlow>
@@ -171,26 +269,32 @@ const About = () => {
       </section>
 
       {/* Personal Consultation */}
-
-      <section className="about-consultation container">
+      <section className="about-consultation container reveal-section">
         <div className="consultation-card">
-          <h2>Personal Consultation</h2>
-          <p>
-            Book a one-on-one session with me for in-depth guidance on any area of your life. Each consultation is personalized, confidential, and focused entirely on your questions and concerns.
-          </p>
-          <div className="consultation-details">
-            <div className="consultation-detail"><Clock size={18} /> 30–60 minutes</div>
-            <div className="consultation-detail"><Video size={18} /> Online / Offline</div>
-            <div className="consultation-detail"><Globe size={18} /> Hindi & English</div>
+          <div className="consultation-glass-bg"></div>
+          <div className="consultation-content">
+            <div className="consultation-badge">One-on-One</div>
+            <h2>Personal Consultation</h2>
+            <p>
+              Book a one-on-one session with me for in-depth guidance on any area of your life. Each consultation is personalized, confidential, and focused entirely on your questions and concerns.
+            </p>
+            <div className="consultation-details">
+              <div className="consultation-detail"><Clock size={18} /> 30–60 minutes</div>
+              <div className="consultation-detail"><Video size={18} /> Online / Offline</div>
+              <div className="consultation-detail"><Globe size={18} /> Hindi & English</div>
+            </div>
+            <Magnetic strength={20}>
+              <a href="#contact" className="btn btn-primary btn-lg">
+                <Phone size={18} /> Book Consultation
+              </a>
+            </Magnetic>
           </div>
-          <a href="#contact" className="btn btn-primary btn-lg">
-            <Phone size={18} /> Book Consultation
-          </a>
         </div>
       </section>
 
+
       {/* Testimonials */}
-      <section className="about-testimonials container">
+      <section className="about-testimonials container reveal-section">
         <div className="section-header">
           <span className="section-badge">Client Stories</span>
           <h2 className="section-title">What My Clients Say</h2>
@@ -203,7 +307,7 @@ const About = () => {
               key={i}
               className="testimonial-card"
               edgeSensitivity={30}
-              glowColor="260 80 80"
+              glowColor="108 99 255"
               backgroundColor="var(--color-bg-card)"
               borderRadius={24}
               glowRadius={30}
@@ -221,75 +325,92 @@ const About = () => {
       </section>
 
       {/* Social Presence */}
-      <section className="about-social container">
+      <section className="about-social container reveal-section">
         <h2>Connect With Me</h2>
-        <p style={{ color: 'var(--color-text-secondary)', maxWidth: '500px', margin: '0 auto 1rem' }}>
+        <p className="social-description">
           Follow my journey, daily insights, and cosmic guidance on social media
         </p>
         <div className="social-links">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
-            <Globe size={20} /> Instagram
-          </a>
-          <a href="https://blogspot.com" target="_blank" rel="noopener noreferrer" className="social-link">
-            <BookOpen size={20} /> Blog
-          </a>
+          <Magnetic strength={15}>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <Globe size={20} /> Instagram
+            </a>
+          </Magnetic>
+          <Magnetic strength={15}>
+            <a href="https://blogspot.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <BookOpen size={20} /> Blog
+            </a>
+          </Magnetic>
         </div>
       </section>
 
       {/* Contact Form */}
-      <section className="about-contact container" id="contact">
+      <section className="about-contact container reveal-section" id="contact">
         <div className="section-header">
           <span className="section-badge">Get In Touch</span>
           <h2 className="section-title">Contact Me</h2>
           <p className="section-subtitle">Have a question or want to book a consultation? Reach out below.</p>
         </div>
 
-        <div className="contact-form-wrapper">
-          {formStatus === 'success' ? (
-            <div className="form-success">
-              <CheckCircle size={40} style={{ marginBottom: '1rem' }} />
-              <p>Thank you! Your message has been sent. I will get back to you soon.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label><Users size={16} /> Full Name</label>
-                <input type="text" required placeholder="Your name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+        <div className="contact-form-card">
+          <div className="form-glass-layer"></div>
+          <div className="contact-form-content">
+            {formStatus === 'success' ? (
+              <div className="form-success">
+                <CheckCircle size={48} className="success-icon" />
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out. I will get back to you within 24–48 hours.</p>
+                <button onClick={() => setFormStatus('idle')} className="btn btn-outline">Send Another</button>
               </div>
-              <div className="form-group">
-                <label><Mail size={16} /> Email</label>
-                <input type="email" required placeholder="your@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-              </div>
-              <div className="form-group">
-                <label><Compass size={16} /> Consultation Type</label>
-                <select required value={formData.consultationType} onChange={(e) => setFormData({...formData, consultationType: e.target.value})}>
-                  <option value="">Select a service</option>
-                  <option value="astrology">Astrology</option>
-                  <option value="numerology">Numerology</option>
-                  <option value="kundali">Kundali Analysis</option>
-                  <option value="tarot">Tarot Reading</option>
-                  <option value="career">Career Guidance</option>
-                  <option value="marriage">Marriage Consultation</option>
-                  <option value="health">Health Insights</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label><MessageCircle size={16} /> Message</label>
-                <textarea required placeholder="Tell me about your question or concern..." value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
-              </div>
-              <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} disabled={formStatus === 'sending'}>
-                <Send size={18} /> {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-              </button>
-              {formStatus === 'error' && (
-                <p style={{ color: '#ff6b6b', textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
-                  Something went wrong. Please try again or email directly.
-                </p>
-              )}
-            </form>
-          )}
+            ) : (
+              <form onSubmit={handleSubmit} className="premium-form">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label><Users size={16} /> Full Name</label>
+                    <input type="text" required placeholder="Aria Star" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                  </div>
+                  <div className="form-group">
+                    <label><Mail size={16} /> Email</label>
+                    <input type="email" required placeholder="aria@cosmos.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label><Compass size={16} /> Consultation Type</label>
+                  <select required value={formData.consultationType} onChange={(e) => setFormData({...formData, consultationType: e.target.value})}>
+                    <option value="">Select a service</option>
+                    <option value="astrology">Astrology Analysis</option>
+                    <option value="numerology">Numerology Insights</option>
+                    <option value="kundali">Kundali Matching</option>
+                    <option value="tarot">Tarot Reading</option>
+                    <option value="career">Career Guidance</option>
+                    <option value="marriage">Marriage Consultation</option>
+                    <option value="other">Other Inquiry</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label><MessageCircle size={16} /> Your Message</label>
+                  <textarea required placeholder="How can I help you navigate your journey?" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
+                </div>
+
+                <Magnetic strength={10}>
+                  <button type="submit" className="btn btn-primary btn-submit" disabled={formStatus === 'sending'}>
+                    <Send size={18} /> {formStatus === 'sending' ? 'Sending Magic...' : 'Send Message'}
+                  </button>
+                </Magnetic>
+                
+                {formStatus === 'error' && (
+                  <p className="form-error-msg">
+                    Something went wrong. Please try again later.
+                  </p>
+                )}
+              </form>
+            )}
+          </div>
         </div>
       </section>
+
     </div>
   );
 };
