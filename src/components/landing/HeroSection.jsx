@@ -48,27 +48,25 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section" ref={sectionRef}>
-      {!isTouchDevice && (
-        <div className="hero-aurora-bg" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.5 }}>
-          <SoftAurora
-            speed={0.6}
-            scale={1.5}
-            brightness={1}
-            color1="#0a0a0c"
-            color2="#e100ff"
-            noiseFrequency={2.5}
-            noiseAmplitude={1}
-            bandHeight={0.5}
-            bandSpread={1}
-            octaveDecay={0.1}
-            layerOffset={0}
-            colorSpeed={1}
-            enableMouseInteraction
-            mouseInfluence={0.25}
-          />
-        </div>
-      )}
-      <div className="hero-content container" ref={contentRef}>
+      <div className="hero-aurora-bg" style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.5 }}>
+        <SoftAurora
+          speed={0.6}
+          scale={1.5}
+          brightness={1}
+          color1="#0a0a0c"
+          color2="#e100ff"
+          noiseFrequency={2.5}
+          noiseAmplitude={1}
+          bandHeight={0.5}
+          bandSpread={1}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={1}
+          enableMouseInteraction
+          mouseInfluence={0.25}
+        />
+      </div>
+      <div className="hero-content container" style={{ position: 'relative', zIndex: 1 }} ref={contentRef}>
         <div className="hero-text-side">
           <div className="hero-badge">
             <Sparkle size={14} />

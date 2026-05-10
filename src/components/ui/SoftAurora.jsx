@@ -23,7 +23,7 @@ void main() {
 `;
 
 const fragmentShader = `
-precision highp float;
+precision mediump float;
 
 uniform float uTime;
 uniform vec3 uResolution;
@@ -116,7 +116,9 @@ float auroraGlow(float t, vec2 shift) {
   float amp = uNoiseAmp;
   vec2 samplePos = uv * uScale;
 
+  float octaves = uResolution.x < 768.0 ? 2.0 : 3.0;
   for (float i = 0.0; i < 3.0; i += 1.0) {
+    if (i >= octaves) break;
     noiseVal += perlin3D(amp, freq, samplePos.x, samplePos.y, t);
     amp *= uOctaveDecay;
     freq *= 2.0;

@@ -36,43 +36,38 @@ function AppContent() {
   const showFooter = location.pathname !== '/about';
 
   return (
-    <div className="App">
+    <div className="App" style={{ position: 'relative', minHeight: '100vh' }}>
       <CustomCursor />
-      {/* WebGL background — desktop only for performance */}
-      {!isTouchDevice && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
-          <Grainient
-            color1="#FF9FFC"
-            color2="#5227FF"
-            color3="#B497CF"
-            timeSpeed={1.25}
-            colorBalance={0}
-            warpStrength={1}
-            warpFrequency={5}
-            warpSpeed={2}
-            warpAmplitude={50}
-            blendAngle={0}
-            blendSoftness={0.5}
-            rotationAmount={500}
-            noiseScale={2}
-            grainAmount={0.1}
-            grainScale={2}
-            grainAnimated={false}
-            contrast={1.5}
-            gamma={1}
-            saturation={1}
-            centerX={0}
-            centerY={0}
-            zoom={0.9}
-          />
-        </div>
-      )}
-      {/* CSS gradient fallback for mobile */}
-      {isTouchDevice && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none', background: 'linear-gradient(135deg, #FDF4FF 0%, #EDE9FF 40%, #FFF0F5 70%, #FFF8EE 100%)' }} />
-      )}
-      {/* Navigation */}
-      <nav className="main-nav">
+      {/* WebGL background — Now correctly layered for iOS visibility */}
+      <div className="global-bg-wrapper" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+        <Grainient
+          color1="#FF9FFC"
+          color2="#5227FF"
+          color3="#B497CF"
+          timeSpeed={1.25}
+          colorBalance={0}
+          warpStrength={1}
+          warpFrequency={5}
+          warpSpeed={2}
+          warpAmplitude={50}
+          blendAngle={0}
+          blendSoftness={0.5}
+          rotationAmount={500}
+          noiseScale={2}
+          grainAmount={0.1}
+          grainScale={2}
+          grainAnimated={false}
+          contrast={1.5}
+          gamma={1}
+          saturation={1}
+          centerX={0}
+          centerY={0}
+          zoom={0.9}
+        />
+      </div>
+
+      {/* Navigation — Layered above bg */}
+      <nav className="main-nav" style={{ position: 'relative', zIndex: 10 }}>
         <div className="container nav-container">
           <Link to="/" className="nav-logo">
             <span className="logo-symbol"><Sparkle size={20} /></span>
@@ -130,8 +125,8 @@ function AppContent() {
         </div>
       </nav>
 
-      {/* Routes wrapped in smooth scroll */}
-      <main>
+      {/* Main Content — Layered above bg */}
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <SmoothScroller>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -143,9 +138,9 @@ function AppContent() {
         </SmoothScroller>
       </main>
 
-      {/* Conditional Footer */}
+      {/* Conditional Footer — Layered above bg */}
       {showFooter && (
-        <footer className="main-footer">
+        <footer className="main-footer" style={{ position: 'relative', zIndex: 1 }}>
           {!isTouchDevice && (
             <div className="footer-waves-bg">
               <LineWaves
