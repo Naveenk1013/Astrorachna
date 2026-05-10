@@ -93,7 +93,6 @@ const About = () => {
   const [formStatus, setFormStatus] = useState('idle');
   const [selectedService, setSelectedService] = useState(null);
   const containerRef = useRef(null);
-  const modalRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
