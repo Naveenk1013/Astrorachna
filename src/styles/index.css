@@ -108,9 +108,9 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Global spacing buffer for fixed navbar */
+/* Global spacing buffer removed to allow immersive hero sections */
 .App {
-  padding-top: var(--nav-height);
+  padding-top: 0;
 }
 
 

@@ -32,7 +32,7 @@ const HeroSection = () => {
       });
 
       // Parallax background orbs
-      gsap.to('.hero-section::before', {
+      gsap.to('.hero-bg-parallax', {
         y: 300,
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -66,6 +66,7 @@ const HeroSection = () => {
           mouseInfluence={0.25}
         />
       </div>
+      <div className="hero-bg-parallax" style={{ position: 'absolute', inset: 0, zIndex: 0 }}></div>
       <div className="hero-content container" style={{ position: 'relative', zIndex: 1 }} ref={contentRef}>
         <div className="hero-text-side">
           <div className="hero-badge">

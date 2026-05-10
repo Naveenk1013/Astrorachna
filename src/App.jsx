@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link, NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Sparkle, Sparkles, AlertCircle, Mail, MessageCircle, Link as LinkIcon, Video } from 'lucide-react';
+import { Sparkle, Sparkles, AlertCircle, BookOpen, Moon, Mail, MessageCircle, Link as LinkIcon, Video } from 'lucide-react';
 import CustomCursor from './components/ui/CustomCursor';
 import SmoothScroller from './components/layout/SmoothScroller';
+import PillNav from './components/ui/PillNav';
 import Grainient from './components/ui/Grainient';
 import Magnetic from './components/ui/Magnetic';
 import LineWaves from './components/ui/LineWaves';
@@ -26,11 +27,11 @@ function AppContent() {
   );
 
   const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/learn', label: 'Learn Astrology' },
-    { to: '/reading', label: 'Tarot Reading' },
-    { to: '/birth-card', label: 'Birth Cards' },
+    { to: '/', label: 'Home', icon: <Sparkle size={18} /> },
+    { to: '/about', label: 'About', icon: <AlertCircle size={18} /> },
+    { to: '/learn', label: 'Learn Astrology', icon: <BookOpen size={18} /> },
+    { to: '/reading', label: 'Tarot Reading', icon: <Sparkles size={18} /> },
+    { to: '/birth-card', label: 'Birth Cards', icon: <Moon size={18} /> },
   ];
 
   const showFooter = location.pathname !== '/about';
@@ -38,92 +39,28 @@ function AppContent() {
   return (
     <div className="App" style={{ position: 'relative', minHeight: '100vh' }}>
       <CustomCursor />
-      {/* WebGL background — Now correctly layered for iOS visibility */}
-      <div className="global-bg-wrapper" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+      {/* WebGL background */}
+      <div className="global-bg-wrapper" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <Grainient
           color1="#FF9FFC"
           color2="#5227FF"
           color3="#B497CF"
           timeSpeed={1.25}
-          colorBalance={0}
-          warpStrength={1}
-          warpFrequency={5}
-          warpSpeed={2}
-          warpAmplitude={50}
-          blendAngle={0}
-          blendSoftness={0.5}
-          rotationAmount={500}
-          noiseScale={2}
-          grainAmount={0.1}
-          grainScale={2}
-          grainAnimated={false}
-          contrast={1.5}
-          gamma={1}
-          saturation={1}
-          centerX={0}
-          centerY={0}
           zoom={0.9}
         />
       </div>
-
-      {/* Navigation — Layered above bg */}
-      <nav className="main-nav">
-        <div className="container nav-container">
-          <Link to="/" className="nav-logo">
-            <span className="logo-symbol"><Sparkle size={20} /></span>
-            <span className="logo-text">Rachna</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="nav-links desktop-nav">
-            {navLinks.map(link => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </div>
-
-          <Link to="/reading" className="nav-cta desktop-nav">
-            <Sparkles size={14} />
-            Free Reading
-          </Link>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="mobile-menu-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}></span>
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
-          {navLinks.map(link => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => isActive ? 'mobile-nav-link active' : 'mobile-nav-link'}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-          <Link
-            to="/reading"
-            className="btn btn-primary mobile-cta"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <Sparkles size={14} />
-            Free Reading
-          </Link>
-        </div>
-      </nav>
+      <PillNav
+        logo={<Sparkle size={24} color="#6C63FF" />}
+        logoAlt="Rachna Logo"
+        items={navLinks.map(link => ({ label: link.label, href: link.to }))}
+        activeHref={location.pathname}
+        baseColor="#FEFAF5"
+        pillColor="#6C63FF"
+        pillTextColor="#FEFAF5"
+        hoveredPillTextColor="#6C63FF"
+        ease="power4.out"
+        initialLoadAnimation={true}
+      />
 
       {/* Main Content — Layered above bg */}
       <main style={{ position: 'relative', zIndex: 1 }}>

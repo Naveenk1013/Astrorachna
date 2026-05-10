@@ -46,7 +46,7 @@
   min-height: 75vh;
   display: flex;
   align-items: center;
-  padding: 3rem 0 4rem; /* Reduced from 8rem to remove excess gap */
+  padding: 1.5rem 0 4rem; /* Reduced further to remove excess gap */
   background: #0a0a0c; /* Deep dark background */
   overflow: hidden;
 }
@@ -263,7 +263,7 @@
 
 @media (max-width: 480px) {
   .hero-section {
-    padding-top: 6rem;
+    padding-top: 4.5rem; /* Reduced from 6rem */
   }
   .hero-title {
     font-size: 2.2rem;
@@ -631,7 +631,7 @@
 
 @media (max-width: 480px) {
   .hero-section {
-    padding: 5.5rem 1rem 2.5rem;
+    padding: 1.5rem 1rem 2.5rem; /* Ditching the large top margin since nav is at bottom */
     min-height: auto;
   }
   .hero-description { font-size: 1.3rem; }
