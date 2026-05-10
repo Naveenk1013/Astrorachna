@@ -91,7 +91,9 @@ const TESTIMONIALS_DATA = [
 
 const About = () => {
   const [formStatus, setFormStatus] = useState('idle');
+  const [selectedService, setSelectedService] = useState(null);
   const containerRef = useRef(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -104,10 +106,40 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (selectedService) {
+      gsap.fromTo('.service-modal-overlay', 
+        { opacity: 0, backdropFilter: 'blur(0px)' },
+        { opacity: 1, backdropFilter: 'blur(15px)', duration: 0.5, ease: 'power2.out' }
+      );
+      gsap.fromTo('.service-detail-card',
+        { scale: 0.8, y: 50, opacity: 0 },
+        { scale: 1, y: 0, opacity: 1, duration: 0.6, delay: 0.1, ease: 'back.out(1.7)' }
+      );
+      // Continuous float for the icon inside
+      gsap.to('.modal-floating-icon', {
+        y: -15,
+        rotation: 10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+    }
+  }, [selectedService]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('sending');
     setTimeout(() => setFormStatus('success'), 1500);
+  };
+
+  const closeService = () => {
+    gsap.to('.service-modal-overlay', { 
+      opacity: 0, 
+      duration: 0.4, 
+      onComplete: () => setSelectedService(null) 
+    });
   };
 
   return (
@@ -154,7 +186,11 @@ const About = () => {
               <h3>What I Offer</h3>
               <div className="minimal-service-grid">
                 {SERVICES_DATA.slice(0, 6).map(s => (
-                  <div key={s.id} className="mini-service-tag">
+                  <div 
+                    key={s.id} 
+                    className="mini-service-tag clickable"
+                    onClick={() => setSelectedService(s)}
+                  >
                     <span className="tag-icon">{s.icon}</span>
                     <span className="tag-name">{s.title}</span>
                   </div>
@@ -197,9 +233,41 @@ const About = () => {
           </footer>
         </div>
       </div>
+
+      {/* Service Detail Modal Overlay */}
+      {selectedService && (
+        <div className="service-modal-overlay" onClick={closeService}>
+          <div className="service-detail-card" onClick={(e) => e.stopPropagation()}>
+            <button className="close-service-btn" onClick={closeService}>
+              <CheckCircle size={24} style={{ transform: 'rotate(45deg)' }} />
+            </button>
+            
+            <div className="modal-visual-area">
+              <div className="modal-image-wrapper">
+                <img src={selectedService.image} alt={selectedService.title} />
+                <div className="modal-floating-icon">
+                  {selectedService.icon}
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-text-area">
+              <div className="modal-service-badge">{selectedService.id}</div>
+              <h2>{selectedService.title}</h2>
+              <p>{selectedService.desc}</p>
+              <div className="modal-cta-row">
+                <button className="modal-action-btn" onClick={closeService}>
+                  I'm Interested
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 
 
 
